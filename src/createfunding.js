@@ -56,60 +56,53 @@ class createfunding extends  React.Component {
         return (
             <div id="wrapper">
 
-                <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+                <ul className="navbar-nav col-xl-1 bg-warning sidebar sidebar-dark accordion" id="accordionSidebar">
 
-                    <a className="sidebar-brand d-flex align-items-center justify-content-center">
-                        <div className="sidebar-brand-icon rotate-n-15">
-                            <i className="fas fa-laugh-wink"/>
-                        </div>
-                        <div className="sidebar-brand-text mx-3">众筹系统 <sup>zju</sup></div>
-                    </a>
-
-                    {/*<!-- Divider -->*/}
-                    {/*<hr className="sidebar-divider my-0">*/}
-
-                    {/*// <!-- Nav Item - Dashboard -->*/}
-                    <li className="nav-item">
-                        <Link className="nav-link" to='/home'>
-                            <i className="fas fa-fw fa-tachometer-alt"/>
-                            <span>首页</span></Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to='/allfundings'>
-                            <i className="fas fa-fw fa-tachometer-alt"/>
-                            <span>所有众筹</span></Link>
-                    </li>
-                    {/*<!-- Divider -->*/}
-                    {/*<hr className="sidebar-divider">*/}
-
-                    <li className="nav-item active">
-                        <Link className="nav-link" to='/createfunding'>
-                            <i className="fas fa-fw fa-tachometer-alt"/>
-                            <span>发起众筹</span></Link>
-                    </li>
-
-                    {/*<!-- Divider -->*/}
-                    {/*<hr className="sidebar-divider">*/}
-
-                    <li className="nav-item">
-                        <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                           aria-expanded="true" aria-controls="collapseTwo">
-                            <i className="fas fa-fw fa-tachometer-alt"/>
-                            <span>我的众筹</span>
+                        <a className="sidebar-brand d-flex align-items-center justify-content-center">
+                            <div className="sidebar-brand-text mx-2">众筹系统</div>
                         </a>
-                        <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo"
-                             data-parent="#accordionSidebar">
-                            <div className="bg-white py-2 collapse-inner rounded">
-                                <h6 className="collapse-header">我的众筹:</h6>
-                                <Link className="collapse-item" to="/my_launch_fundings">我发起的众筹</Link>
-                                <Link className="collapse-item" to="/my_joined_fundings">我参与的众筹</Link>
+
+                        {/*<!-- Divider -->*/}
+                        {/*<hr className="sidebar-divider my-0">*/}
+
+                        {/*// <!-- Nav Item - Dashboard -->*/}
+                        <li className="nav-item  active">
+                            <Link className="nav-link" to='/home'>
+                                <span>首页</span></Link>
+                        </li>
+
+                        <li className="nav-item">
+                            <Link className="nav-link" to='/allfundings'>
+                                <span>所有众筹</span></Link>
+                        </li>
+                        {/*<!-- Divider -->*/}
+                        {/*<hr className="sidebar-divider">*/}
+
+                        <li className="nav-item">
+                            <Link className="nav-link" to='/createfunding'>
+                                <span>发起众筹</span></Link>
+                        </li>
+
+                        {/*<!-- Divider -->*/}
+                        {/*<hr className="sidebar-divider">*/}
+
+                        <li className="nav-item">
+                            <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                               aria-expanded="true" aria-controls="collapseTwo">
+                                <span>我的众筹</span>
+                            </a>
+                            <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo"
+                                 data-parent="#accordionSidebar">
+                                <div className="bg-white py-2 collapse-inner rounded">
+                                    <h6 className="collapse-header">我的众筹:</h6>
+                                    <Link className="collapse-item" to="/my_launch_fundings">我发起的众筹</Link>
+                                    <Link className="collapse-item" to="/my_joined_fundings">我参与的众筹</Link>
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
 
                 </ul>
 
-                <div className="card o-hidden border-0 shadow-lg my-5 col-10">
                     <div className="card-body p-0">
                         <div className="row">
                             <div className="col-lg-2 d-none d-lg-block"/>
@@ -135,7 +128,7 @@ class createfunding extends  React.Component {
                                             <label htmlFor="name">项目概述</label>
                                             <textarea className="form-control" rows="5" name="overview" value={this.state.overview} onChange={this.handleChange}/>
                                         </div>
-                                        <a className="btn btn-primary btn-user btn-block" type='submit' onClick={this.up}>
+                                        <a className="btn btn-warning btn-user btn-block" type='submit' onClick={this.up}>
                                             确认发起
                                         </a>
                                     </form>
@@ -144,7 +137,6 @@ class createfunding extends  React.Component {
                             </div>
                         </div>
                     </div>
-                </div>
 
 
             </div>
