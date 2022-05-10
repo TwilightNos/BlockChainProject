@@ -195,7 +195,7 @@ class my_joined_funding_detail extends  React.Component {
 
                         <div class="container-fluid">
                                 <div className="card-header py-3">
-                                    <h5 className="m-0 font-weight-bold text-primary">众筹项目详情</h5>
+                                    <h3 className="m-0 font-weight-bold">众筹项目详情</h3>
                                     <div className="card-body">
                                         <div className="table-responsive" class="row">
                                             <div className="col-lg-12">
@@ -242,9 +242,8 @@ class my_joined_funding_detail extends  React.Component {
                                     </div>
                                 </div>
                                 <div className="card-header py-3">
-                                    <div className="container-fluid">
                                         <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                                            <h5 className="m-0 font-weight-bold text-primary">使用情况详情</h5>
+                                            <h5 className="m-0 font-weight-bold">使用情况详情</h5>
                                         </div>
                                         <div className="col-lg-12">
                                             {
@@ -252,7 +251,7 @@ class my_joined_funding_detail extends  React.Component {
                                                     ?null
                                                     :proposals.map((item,index)=>{
                                                         return (
-                                                            <div className="card mb-4 py-3 border-left-dark">
+                                                            <div className="">
                                                                 <div className="card-header py-3">
                                                                     <a className="btn btn-success btn-icon-split" style={{float: "left"}} type="submit" onClick={ e => this.up(e,1, {index}) }>
                                                                         <span className="icon text-white-50"><i className="fas fa-check"/></span>
@@ -268,30 +267,26 @@ class my_joined_funding_detail extends  React.Component {
                                                                 <div className="card-body">
                                                                     <div className="row">
                                                                         <div className="col-xl-6 col-md-6 mb-4">
-                                                                            <div className="card border-left-success shadow h-100 py-2">
                                                                                 <div className="card-body">
                                                                                     <div className="row no-gutters align-items-center">
                                                                                         <div className="col mr-2">
                                                                                             <div
-                                                                                                className="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                                                                className="text-ls font-weight-bold text-uppercase mb-1">
                                                                                                 申请金额
                                                                                             </div>
                                                                                             <div className="h5 mb-0 font-weight-bold text-gray-800">{item.amount}eth</div>
                                                                                         </div>
                                                                                         <div className="col-auto">
-                                                                                            <i className="fas fa-dollar-sign fa-2x text-gray-300"/>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
                                                                         </div>
                                                                         <div className="col-xl-6 col-md-6 mb-4">
-                                                                            <div className="card border-left-info shadow h-100 py-2">
                                                                                 <div className="card-body">
                                                                                     <div className="row no-gutters align-items-center">
                                                                                         <div className="col mr-2">
                                                                                             <div
-                                                                                                className="text-xs font-weight-bold text-info text-uppercase mb-1">同意百分比
+                                                                                                className="text-ls font-weight-bold text-uppercase mb-1">同意百分比
                                                                                             </div>
                                                                                             <div className="row no-gutters align-items-center">
                                                                                                 <div className="col-auto">
@@ -310,29 +305,24 @@ class my_joined_funding_detail extends  React.Component {
                                                                                             </div>
                                                                                         </div>
                                                                                         <div className="col-auto">
-                                                                                            <i className="fas fa-clipboard-list fa-2x text-gray-300"/>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
                                                                         </div>
                                                                         <div className="col-xl-12 col-md-6 mb-4">
-                                                                            <div className="card border-left-warning shadow h-100 py-2">
                                                                                 <div className="card-body">
                                                                                     <div className="row no-gutters align-items-center">
                                                                                         <div className="col mr-2">
                                                                                             <div
-                                                                                                className="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                                                                className="text-ls font-weight-bold text-uppercase mb-1">
                                                                                                 使用说明
                                                                                             </div>
                                                                                             <div className="h5 mb-0 font-weight-bold text-gray-800">{item.content}</div>
                                                                                         </div>
                                                                                         <div className="col-auto">
-                                                                                            <i className="fas fa-comments fa-2x text-gray-300"/>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -341,10 +331,6 @@ class my_joined_funding_detail extends  React.Component {
                                                     },this)
                                             }
                                         </div>
-
-                                    </div>
-                                    <div>
-                                    </div>
                                 </div>
                         </div>
                     </div>
