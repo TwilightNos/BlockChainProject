@@ -10,7 +10,7 @@ class voting_info extends  React.Component {
         super();
         this.state={
             accounts: '',
-            money:0
+            tickets:0
         }
         this.handleChange=this.handleChange.bind(this);
         this.up=this.up.bind(this);
@@ -53,17 +53,17 @@ class voting_info extends  React.Component {
         })
     };
     async up(){
-        if (this.state.money === 0){
-            alert('金额必须大于0!')
+        if (this.state.tickets === 0){
+            alert('金额必须大于1!')
         }
         else{
-            if(this.state.money > (project.target_voting - project.num_voted)){
+            if(this.state.tickets > (project.target_voting - project.num_voted)){
                 alert('您最多可再投资' + (project.target_voting - project.num_voted) + "个以太坊！")
             }
             else{
                 await VotingInstance.methods.contribute(this.props.match.params.id).send({
                     from: this.state.accounts[0],
-                    value: web3.utils.toWei(this.state.money, 'ether')
+                    value: web3.utils.toWei(this.state.tickets, 'ether')
                 })
                 alert('恭喜您，投资成功！')
             }
@@ -233,7 +233,7 @@ class voting_info extends  React.Component {
                                                             </button>
                                                         </div>
                                                         <div className="modal-body">
-                                                            <input type="number" min="0" className="form-control form-control-user" name="money" value={this.state.money} onChange={this.handleChange}/>
+                                                            <input type="number" min="0" className="form-control form-control-user" name="tickets" value={this.state.tickets} onChange={this.handleChange}/>
                                                         </div>
                                                         <div className="modal-footer">
                                                             <button type="button" className="btn btn-default"

@@ -127,7 +127,7 @@ let abi = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_fundId",
+				"name": "_votingId",
 				"type": "uint256"
 			}
 		],
@@ -142,7 +142,7 @@ let abi = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_fundId",
+				"name": "_votingId",
 				"type": "uint256"
 			},
 			{
@@ -156,7 +156,7 @@ let abi = [
 				"type": "uint256"
 			}
 		],
-		"name": "createProposal",
+		"name": "Announcement_Creator",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -167,12 +167,12 @@ let abi = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_fundId",
+				"name": "_votingId",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "_proposalId",
+				"name": "_announcementId",
 				"type": "uint256"
 			},
 			{
@@ -181,7 +181,7 @@ let abi = [
 				"type": "bool"
 			}
 		],
-		"name": "agreeProposal",
+		"name": "confirmAnnouncement",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -192,11 +192,11 @@ let abi = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_fundId",
+				"name": "_votingId",
 				"type": "uint256"
 			}
 		],
-		"name": "getMyFundings",
+		"name": "MyVotings",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -213,16 +213,16 @@ let abi = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_fundId",
+				"name": "_votingId",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "_proposalId",
+				"name": "_announcementId",
 				"type": "uint256"
 			}
 		],
-		"name": "getProposal",
+		"name": "receiveAnnouncement",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -264,11 +264,11 @@ let abi = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_fundId",
+				"name": "_votingId",
 				"type": "uint256"
 			}
 		],
-		"name": "getProposalsLength",
+		"name": "num_of_Announcements",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -296,6 +296,6 @@ let abi = [
 		"type": "function"
 	}
 ]
-let address = '0x13A194C98eEf7843a949E66b6948F2A1b3143e09'
+let address = '0x9B05A8412F5A28E09e1B9790d61FC914E6F75af8'
 let VotingInstance = new web3.eth.Contract(abi, address)
 module.exports = VotingInstance

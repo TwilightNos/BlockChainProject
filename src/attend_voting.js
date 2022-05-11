@@ -56,10 +56,10 @@ class attend_voting extends  React.Component {
         let projects_number = await VotingInstance.methods.all_votings_num().call()
         for(let i = 0; i < projects_number; i++){
             let project =await VotingInstance.methods.all_Votings(i).call()
-            let money = await VotingInstance.methods.getMyFundings(i).call({
+            let tickets = await VotingInstance.methods.MyVotings(i).call({
                 from: accounts[0]
             })
-            if(money > 0){
+            if(tickets > 0){
                 console.log(i)
                 indexes.push(i)
                 projects.push(project)

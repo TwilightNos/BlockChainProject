@@ -12,7 +12,7 @@ class attend_voting_info extends  React.Component {
         super();
         this.state={
             accounts: '',
-            money:0,
+            tickets:0,
             content:''
         }
     }
@@ -25,7 +25,7 @@ class attend_voting_info extends  React.Component {
         project.num_voted = web3.utils.fromWei(project.num_voted, 'ether')
         let proposal_length = project.comment_num
         for(let i = 1; i <= proposal_length; i++){
-            let proposal = {
+            let announcement = {
                 content:'',
                 amount:0,
                 agreeAmount:0,
@@ -37,25 +37,25 @@ class attend_voting_info extends  React.Component {
                 total:0
             }
             result = []
-            result = await VotingInstance.methods.getProposal(this.props.match.params.id, i).call()
-            proposal.content = result[0]
-            proposal.amount = result[1]
-            proposal.amount = web3.utils.fromWei(proposal.amount, 'ether')
-            proposal.agreeAmount = result[2]
-            proposal.agreeAmount = web3.utils.fromWei(proposal.agreeAmount, 'ether')
-            proposal.disAmount = result[3]
-            proposal.goal = result[4]
-            proposal.goal = web3.utils.fromWei(proposal.goal, 'ether')
-            proposal.total = proposal.goal * 2
-            proposal.isAgreed = result[5]
-            console.log(proposal.isAgreed)
-            if(proposal.isAgreed){
-                proposal.p_state = "已批准"
+            result = await VotingInstance.methods.receiveAnnouncement(this.props.match.params.id, i).call()
+            announcement.content = result[0]
+            announcement.amount = result[1]
+            announcement.amount = web3.utils.fromWei(announcement.amount, 'ether')
+            announcement.agreeAmount = result[2]
+            announcement.agreeAmount = web3.utils.fromWei(announcement.agreeAmount, 'ether')
+            announcement.disAmount = result[3]
+            announcement.goal = result[4]
+            announcement.goal = web3.utils.fromWei(announcement.goal, 'ether')
+            announcement.total = announcement.goal * 2
+            announcement.isAgreed = result[5]
+            console.log(announcement.isAgreed)
+            if(announcement.isAgreed){
+                announcement.p_state = "已批准"
             }
             else{
-                proposal.p_state = "未批准"
+                announcement.p_state = "未批准"
             }
-            comments.push(proposal)
+            comments.push(announcement)
         }
         ddl = project.deadline
         let current_time = Date.parse(new Date())
@@ -81,13 +81,13 @@ class attend_voting_info extends  React.Component {
         let flag
         if(value === 1){
             flag = true
-            await VotingInstance.methods.agreeProposal(this.props.match.params.id, proposal_id.index + 1, flag).send({from:this.state.accounts[0]})
+            await VotingInstance.methods.confirmAnnouncement(this.props.match.params.id, proposal_id.index + 1, flag).send({from:this.state.accounts[0]})
             //comments[proposal_id.index].my_attitude = true
             alert('批准申请成功!')
         }
         else{
             flag = false
-            await VotingInstance.methods.agreeProposal(this.props.match.params.id, proposal_id.index + 1, flag).send({from:this.state.accounts[0]})
+            await VotingInstance.methods.confirmAnnouncement(this.props.match.params.id, proposal_id.index + 1, flag).send({from:this.state.accounts[0]})
             //comments[proposal_id].my_attitude = false
             alert('否决申请成功!')
         }

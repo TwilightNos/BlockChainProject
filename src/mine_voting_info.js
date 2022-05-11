@@ -13,7 +13,7 @@ class mine_voting_info extends  React.Component {
         super();
         this.state={
             accounts: '',
-            money:0,
+            tickets:0,
             content:''
         }
         this.handleChange=this.handleChange.bind(this);
@@ -37,7 +37,7 @@ class mine_voting_info extends  React.Component {
         project.num_voted = web3.utils.fromWei(project.num_voted, 'ether')
         let proposal_length = project.comment_num
         for(let i = 0; i < proposal_length; i++){
-            let proposal = {
+            let announcement = {
                 content:'',
                 amount:0,
                 agreeAmount:0,
@@ -48,25 +48,25 @@ class mine_voting_info extends  React.Component {
                 total:0
             }
             result = []
-            result = await VotingInstance.methods.getProposal(this.props.match.params.id, i + 1).call()
-            proposal.content = result[0]
-            proposal.amount = result[1]
-            proposal.amount = web3.utils.fromWei(proposal.amount, 'ether')
-            console.log(proposal.amount)
-            proposal.agreeAmount = result[2]
-            proposal.agreeAmount = web3.utils.fromWei(proposal.agreeAmount, 'ether')
-            proposal.disAmount = result[3]
-            proposal.goal = result[4]
-            proposal.goal = web3.utils.fromWei(proposal.goal, 'ether')
-            proposal.total = 2 * proposal.goal
-            proposal.isAgreed = result[5]
-            if(proposal.isAgreed){
-                proposal.p_state = "已批准"
+            result = await VotingInstance.methods.receiveAnnouncement(this.props.match.params.id, i + 1).call()
+            announcement.content = result[0]
+            announcement.amount = result[1]
+            announcement.amount = web3.utils.fromWei(announcement.amount, 'ether')
+            console.log(announcement.amount)
+            announcement.agreeAmount = result[2]
+            announcement.agreeAmount = web3.utils.fromWei(announcement.agreeAmount, 'ether')
+            announcement.disAmount = result[3]
+            announcement.goal = result[4]
+            announcement.goal = web3.utils.fromWei(announcement.goal, 'ether')
+            announcement.total = 2 * announcement.goal
+            announcement.isAgreed = result[5]
+            if(announcement.isAgreed){
+                announcement.p_state = "已批准"
             }
             else{
-                proposal.p_state = "未批准"
+                announcement.p_state = "未批准"
             }
-            comments.push(proposal)
+            comments.push(announcement)
         }
         ddl = project.deadline
         let current_time = Date.parse(new Date())
@@ -90,16 +90,16 @@ class mine_voting_info extends  React.Component {
     };
     async up(){
 
-        if (this.state.money === 0){
+        if (this.state.tickets === 0){
             alert('金额必须大于0!')
         }
-        else if((project.num_voted - project.usedMoney) < this.state.money){
+        else if((project.num_voted - project.usedMoney) < this.state.tickets){
             alert('您最多可使用' + (project.num_voted - project.usedMoney) + '以太坊')
         }
         else{
-            let a = await web3.utils.toWei(this.state.money, 'ether')
+            let a = await web3.utils.toWei(this.state.tickets, 'ether')
             console.log(a)
-            await VotingInstance.methods.createProposal(this.props.match.params.id, this.state.content, a).send({
+            await VotingInstance.methods.Announcement_Creator(this.props.match.params.id, this.state.content, a).send({
                 from: this.state.accounts[0]
             })
             alert('申请成功！')
@@ -229,8 +229,8 @@ class mine_voting_info extends  React.Component {
                                                 <div className="modal-body">
                                                     <label htmlFor="name">申请金额</label>
                                                     <input type="number" min="0"
-                                                           className="form-control form-control-user" name="money"
-                                                           value={this.state.money} onChange={this.handleChange}/>
+                                                           className="form-control form-control-user" name="tickets"
+                                                           value={this.state.tickets} onChange={this.handleChange}/>
                                                 </div>
                                                 <div className="modal-body">
                                                     <label htmlFor="name">使用去向</label>
