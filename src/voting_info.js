@@ -61,7 +61,7 @@ class voting_info extends  React.Component {
                 alert('您最多可再投资' + (project.target_voting - project.num_voted) + "个以太坊！")
             }
             else{
-                await VotingInstance.methods.contribute(this.props.match.params.id).send({
+                await VotingInstance.methods.Vote_sender(this.props.match.params.id).send({
                     from: this.state.accounts[0],
                     value: web3.utils.toWei(this.state.tickets, 'ether')
                 })

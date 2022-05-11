@@ -28,7 +28,7 @@ contract Voting{
 
     
     //投资项目的函数
-    function contribute(uint _votingId) public payable {
+    function Vote_sender(uint _votingId) public payable {
         require(msg.value>0);
         require(block.timestamp<=all_Votings[_votingId].deadline);
         Voting storage voting = all_Votings[_votingId];
@@ -41,7 +41,7 @@ contract Voting{
         if(voting.num_voted >= voting.target_voting)voting.isSuccess=true;
     }
     //创建众筹项目的函数
-    function createFunding(address payable _initiator, string memory _title, string memory _content, uint _goalMoney, uint _remainingtime) public returns(uint) {
+    function Voting_constructor(address payable _initiator, string memory _title, string memory _content, uint _goalMoney, uint _remainingtime) public returns(uint) {
         uint num = all_votings_num;
         all_votings_num+=1;
         Voting storage voting = all_Votings[num];

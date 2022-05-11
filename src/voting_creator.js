@@ -44,7 +44,7 @@ class voting_creator extends  React.Component {
                 let amount = web3.utils.toWei(this.state.Amount, 'ether')
                 console.log(amount)
                 let accounts = await web3.eth.getAccounts()
-                await VotingInstance.methods.createFunding(accounts[0], this.state.Name, this.state.overview, amount, timestamp).send({
+                await VotingInstance.methods.Voting_constructor(accounts[0], this.state.Name, this.state.overview, amount, timestamp).send({
                     from: accounts[0]
                 })
                 alert('恭喜您，发起众筹项目成功！')
