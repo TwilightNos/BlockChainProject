@@ -53,9 +53,9 @@ class all_votings extends  React.Component {
         projects = [] //清空数组
         //获取当前的所有地址
         let accounts = await web3.eth.getAccounts()
-        let projects_number = await VotingInstance.methods.allFundingsLength().call()
+        let projects_number = await VotingInstance.methods.all_votings_num().call()
         for(let i = 0; i < projects_number; i++){
-            let project = await VotingInstance.methods.allFundings(i).call()
+            let project = await VotingInstance.methods.all_Votings(i).call()
             projects.push(project)
         }
         this.setState({

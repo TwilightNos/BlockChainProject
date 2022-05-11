@@ -2,7 +2,7 @@ pragma solidity >=0.4.0;
 
 contract Voting{
     struct Voting{
-        address payable initiator; //众筹项目发起者
+        address payable creator_addr; //众筹项目发起者
         string title;//标题
         string content;//内容
         uint target_voting;//目标金额
@@ -22,8 +22,8 @@ contract Voting{
         uint ticket; //投资者的投资金额
     }
 
-    uint public allFundingsLength;//众筹项目的总数量 ??????????
-    mapping(uint => Voting) public allFundings;//所有众筹项目的map ??????????
+    uint public all_votings_num;//众筹项目的总数量 ??????????
+    mapping(uint => Voting) public all_Votings;//所有众筹项目的map ??????????
 
 
     //申请使用资金的记录
@@ -39,8 +39,8 @@ contract Voting{
     //投资项目的函数
     function contribute(uint _fundId) public payable {
         require(msg.value>0);
-        require(block.timestamp<=allFundings[_fundId].deadline);
-        Voting storage funding = allFundings[_fundId];
+        require(block.timestamp<=all_Votings[_fundId].deadline);
+        Voting storage funding = all_Votings[_fundId];
         uint funderNum = funding.voter_num + 1;
         funding.voter_num += 1;
         Voter storage funder = funding.voters[funderNum];
@@ -51,10 +51,10 @@ contract Voting{
     }
     //创建众筹项目的函数
     function createFunding(address payable _initiator, string memory _title, string memory _content, uint _goalMoney, uint _remainingtime) public returns(uint) {
-        uint num = allFundingsLength;
-        allFundingsLength+=1;
-        Voting storage funding = allFundings[num];
-        funding.initiator = _initiator;
+        uint num = all_votings_num;
+        all_votings_num+=1;
+        Voting storage funding = all_Votings[num];
+        funding.creator_addr = _initiator;
         funding.title = _title;
         funding.content = _content;
         funding.target_voting = _goalMoney;
@@ -66,8 +66,8 @@ contract Voting{
 
     //创建申请资金的记录
     function createProposal(uint _fundId, string memory _content, uint _amount) public {
-        Voting storage funding = allFundings[_fundId];
-        require(funding.initiator == msg.sender);
+        Voting storage funding = all_Votings[_fundId];
+        require(funding.creator_addr == msg.sender);
         uint proNum = funding.comment_num + 1;
         funding.comment_num+=1;
         Comment storage proposal = funding.comments[proNum];
@@ -77,7 +77,7 @@ contract Voting{
     }
     //审批申请的函数
     function agreeProposal(uint _fundId, uint _proposalId, bool _isAgree) public funderOfFunding(_fundId){
-        Voting storage funding = allFundings[_fundId];
+        Voting storage funding = all_Votings[_fundId];
         require(_proposalId>=1 && _fundId<=funding.comment_num);
         Comment storage proposal = funding.comments[_proposalId];
         for(uint i = 1; i<=funding.voter_num;i++){
@@ -95,7 +95,7 @@ contract Voting{
         }
         if(proposal.agreeAmount >= proposal.goal){
             proposal.isAgreed = true;
-            funding.initiator.transfer(proposal.amount);
+            funding.creator_addr.transfer(proposal.amount);
             funding.usedMoney += proposal.amount;
         }
         else if(proposal.disAmount >=proposal.goal){
@@ -104,15 +104,15 @@ contract Voting{
     }
     //获取的申请记录
     function getProposal(uint _fundId, uint _proposalId) public view returns(string memory, uint, uint, uint, uint, bool) {
-        require(_fundId>=0 && _fundId<=allFundingsLength);
-        Voting storage funding = allFundings[_fundId];
+        require(_fundId>=0 && _fundId<=all_votings_num);
+        Voting storage funding = all_Votings[_fundId];
         require(_proposalId>=1 && _fundId<=funding.comment_num);
         Comment storage proposal = funding.comments[_proposalId];
         return (proposal.content, proposal.amount, proposal.agreeAmount, proposal.disAmount, proposal.goal, proposal.isAgreed);
     }
     //获取申请记录的数量
     function getProposalsLength(uint _fundId) public view returns(uint){
-        return allFundings[_fundId].comment_num;
+        return all_Votings[_fundId].comment_num;
     }
     //获取合约地址的剩余资金
     function getBalance() public view returns (uint) {
@@ -120,8 +120,8 @@ contract Voting{
     }
     //make sure the funder is in this funding
     modifier funderOfFunding(uint _fundId){
-        require(_fundId>=0 && _fundId<=allFundingsLength);
-        Voting storage funding = allFundings[_fundId];
+        require(_fundId>=0 && _fundId<=all_votings_num);
+        Voting storage funding = all_Votings[_fundId];
         bool isIn = false;
         for(uint i = 1; i<=funding.voter_num;i++){
             Voter memory funder = funding.voters[i];
@@ -134,7 +134,7 @@ contract Voting{
     
     function getMyFundings(uint _fundId) public view returns(uint){
         uint money=0;
-        Voting storage funding = allFundings[_fundId];
+        Voting storage funding = all_Votings[_fundId];
         for(uint j=1;j<=funding.voter_num;j++){
             Voter memory funder = funding.voters[j];
             if(funder.add==msg.sender)
@@ -144,6 +144,6 @@ contract Voting{
     }
     
     function getMyInitFundings(uint _fundId) public view returns(bool){
-        return (allFundings[_fundId].initiator == msg.sender ? true:false);
+        return (all_Votings[_fundId].creator_addr == msg.sender ? true:false);
     }
 }

@@ -23,10 +23,10 @@ class home extends Component {
         let temp = await VotingInstance.methods.getBalance().call()
         temp = await web3.utils.fromWei(temp, 'ether')
         console.log(temp)
-        projects_number = await VotingInstance.methods.allFundingsLength().call()
+        projects_number = await VotingInstance.methods.all_votings_num().call()
         let current_time = Date.parse(new Date())
         for(let i = 0; i < projects_number; i++){
-            let project = await VotingInstance.methods.allFundings(i).call()
+            let project = await VotingInstance.methods.all_Votings(i).call()
             if (project.isSuccess === true){
                 finished += 1
             }

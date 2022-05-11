@@ -27,7 +27,7 @@ class voting_info extends  React.Component {
     componentWillMount = async () => {
         project = {} //清空数组
         //获取当前的所有地址
-        project = await VotingInstance.methods.allFundings(this.props.match.params.id).call()
+        project = await VotingInstance.methods.all_Votings(this.props.match.params.id).call()
         project.usedMoney = web3.utils.fromWei(project.usedMoney, 'ether')
         project.target_voting = web3.utils.fromWei(project.target_voting, 'ether');
         project.num_voted = web3.utils.fromWei(project.num_voted, 'ether')
@@ -176,7 +176,7 @@ class voting_info extends  React.Component {
                                     <div className="table-responsive" class="row">
                                         <div class="col-lg-12">
                                                 <div className="card-body">
-                                                    <h5>众筹项目发起人：<strong>{project.initiator}</strong></h5>
+                                                    <h5>众筹项目发起人：<strong>{project.creator_addr}</strong></h5>
                                                 </div>
                                         </div>
                                         <div class="col-lg-6">
