@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import {Link, NavLink, Redirect, Route, Router, Switch} from "react-router-dom";
-let web3 = require('./utils/InitWeb3');
-let FundingInstance = require('./eth/Funding')
+let web3 = require('./Web3');
+let VotingInstance = require('./Voting')
 let projects = []
 let count_ongoing = 0
 let finished = 0
@@ -20,13 +20,13 @@ class home extends Component {
         count_ongoing = 0
         finished = 0
         let accounts = await web3.eth.getAccounts()
-        let temp = await FundingInstance.methods.getBalance().call()
+        let temp = await VotingInstance.methods.getBalance().call()
         temp = await web3.utils.fromWei(temp, 'ether')
         console.log(temp)
-        projects_number = await FundingInstance.methods.allFundingsLength().call()
+        projects_number = await VotingInstance.methods.allFundingsLength().call()
         let current_time = Date.parse(new Date())
         for(let i = 0; i < projects_number; i++){
-            let project = await FundingInstance.methods.allFundings(i).call()
+            let project = await VotingInstance.methods.allFundings(i).call()
             if (project.isSuccess === true){
                 finished += 1
             }
@@ -61,14 +61,14 @@ class home extends Component {
                         </li>
 
                         <li className="nav-item">
-                            <Link className="nav-link" to='/allfundings'>
+                            <Link className="nav-link" to='/all_votings'>
                                 <span>所有众筹</span></Link>
                         </li>
                         {/*<!-- Divider -->*/}
                         {/*<hr className="sidebar-divider">*/}
 
                         <li className="nav-item">
-                            <Link className="nav-link" to='/createfunding'>
+                            <Link className="nav-link" to='/voting_creator'>
                                 <span>发起众筹</span></Link>
                         </li>
 
@@ -84,8 +84,8 @@ class home extends Component {
                                  data-parent="#accordionSidebar">
                                 <div className="bg-white py-2 collapse-inner rounded">
                                     <h6 className="collapse-header">我的众筹:</h6>
-                                    <Link className="collapse-item" to="/my_launch_fundings">我发起的众筹</Link>
-                                    <Link className="collapse-item" to="/my_joined_fundings">我参与的众筹</Link>
+                                    <Link className="collapse-item" to="/mine_voting">我发起的众筹</Link>
+                                    <Link className="collapse-item" to="/attend_voting">我参与的众筹</Link>
                                 </div>
                             </div>
                         </li>
@@ -167,7 +167,7 @@ class home extends Component {
 											<div className="row no-gutters align-items-center">
 													<div
 														className="text-xl font-weight-boldtext-uppercase mb-1"> <h5>已筹项目数: <strong>{finished}</strong></h5>
-													</div>                                                        
+													</div>
 											</div>
 										</div>
                                     </div>

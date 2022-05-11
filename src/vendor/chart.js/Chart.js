@@ -7881,7 +7881,7 @@ var implementation = platform_dom$2._enabled ? platform_dom$2 : platform_basic;
 
 /**
  * @namespace Chart.platform
- * @see https://chartjs.gitbooks.io/proposals/content/Platform.html
+ * @see https://chartjs.gitbooks.io/comments/content/Platform.html
  * @since 2.4.0
  */
 var platform = helpers$1.extend({

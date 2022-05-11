@@ -5774,7 +5774,7 @@ dollar-sign:
   search:
     terms:
       - $
-      - cost
+      - ticket
       - dollar-sign
       - money
       - price

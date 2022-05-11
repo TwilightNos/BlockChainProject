@@ -1,5 +1,5 @@
-var Funding = artifacts.require("./Funding.sol");
+var Voting = artifacts.require("./Voting.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(Funding);
+  deployer.deploy(Voting);
 };

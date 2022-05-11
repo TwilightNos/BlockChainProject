@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
 import {Route, HashRouter} from "react-router-dom";
-import createfunding from "./createfunding";
+import voting_creator from "./voting_creator";
 import home from "./home";
-import allfundings from "./allfundings";
-import funding_detail from "./funding_detail";
-import my_launch_fundings from "./my_launch_fundings";
-import my_launch_funding_detail from "./my_launch_funding_detail";
-import my_joined_fundings from "./my_joined_fundings";
-import my_joined_funding_detail from "./my_joined_funding_detail";
+import all_votings from "./all_votings";
+import voting_info from "./voting_info";
+import mine_voting from "./mine_voting";
+import mine_voting_info from "./mine_voting_info";
+import attend_voting from "./attend_voting";
+import attend_voting_info from "./attend_voting_info";
 class App extends React.Component {
     render() {
     return (
@@ -16,13 +16,13 @@ class App extends React.Component {
           <div>
               <Route path="/" component={home} exact />
             <Route exact path="/home" component={home} />
-            <Route exact path="/createfunding" component={createfunding} />
-            <Route exact path="/allfundings" component={allfundings} />
-              <Route exact path="/funding_detail/:id" component={funding_detail} />
-            <Route exact path="/my_launch_fundings" component={my_launch_fundings} />
-              <Route exact path="/my_launch_funding_detail/:id" component={my_launch_funding_detail} />
-              <Route exact path="/my_joined_fundings" component={my_joined_fundings} />
-              <Route exact path="/my_joined_funding_detail/:id" component={my_joined_funding_detail} />
+            <Route exact path="/voting_creator" component={voting_creator} />
+            <Route exact path="/all_votings" component={all_votings} />
+              <Route exact path="/voting_info/:id" component={voting_info} />
+            <Route exact path="/mine_voting" component={mine_voting} />
+              <Route exact path="/mine_voting_info/:id" component={mine_voting_info} />
+              <Route exact path="/attend_voting" component={attend_voting} />
+              <Route exact path="/attend_voting_info/:id" component={attend_voting_info} />
           </div>
         </HashRouter>
     );

@@ -1518,7 +1518,7 @@
 	
 	/**
 	 * Determine if all values in the array are unique. This means we can short
-	 * cut the _unique method at the cost of a single loop. A sorted array is used
+	 * cut the _unique method at the ticket of a single loop. A sorted array is used
 	 * to easily check the values.
 	 *
 	 * @param  {array} src Source array
