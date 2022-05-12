@@ -32,7 +32,7 @@ class voting_info extends  React.Component {
         project.target_voting = web3.utils.fromWei(project.target_voting, 'ether');
         project.num_voted = web3.utils.fromWei(project.num_voted, 'ether')
         console.log(project)
-        ddl = project.deadline
+        ddl = project.endtime
         let current_time = Date.parse(new Date())
         if(project.isSuccess === true){
             state = "已完成募集"
@@ -58,14 +58,21 @@ class voting_info extends  React.Component {
         }
         else{
             if(this.state.tickets > (project.target_voting - project.num_voted)){
-                alert('您最多可再投资' + (project.target_voting - project.num_voted) + "个以太坊！")
+                alert('已满足投票要求，无需再投！')
             }
-            else{
+            else if(this.state.tickets == 1){
                 await VotingInstance.methods.Vote_sender(this.props.match.params.id).send({
                     from: this.state.accounts[0],
-                    value: web3.utils.toWei(this.state.tickets, 'ether')
+                    value: web3.utils.toWei(this.state.tickets,'ether')
                 })
-                alert('恭喜您，投资成功！')
+                alert('恭喜您，投资成功1！')
+            }
+            else if(this.state.tickets == 2){
+                await VotingInstance.methods.Vote_sender(this.props.match.params.id).send({
+                    from: this.state.accounts[0],
+                    value: web3.utils.toWei(this.state.tickets,'ether')
+                })
+                alert('恭喜您，投资成功2！')
             }
         }
     }
@@ -76,7 +83,7 @@ class voting_info extends  React.Component {
                 <ul className="navbar-nav col-xl-1 bg-warning sidebar sidebar-dark accordion" id="accordionSidebar">
 
                     <a className="sidebar-brand d-flex align-items-center justify-content-center">
-                        <div className="sidebar-brand-text mx-2">众筹系统</div>
+                        <div className="sidebar-brand-text mx-2">投票系统</div>
                     </a>
 
                     {/*<!-- Divider -->*/}
@@ -89,14 +96,14 @@ class voting_info extends  React.Component {
                     </li>
                     <li className="nav-item active">
                         <Link className="nav-link" to='/all_votings'>
-                            <span>所有众筹</span></Link>
+                            <span>所有投票</span></Link>
                     </li>
                     {/*<!-- Divider -->*/}
                     {/*<hr className="sidebar-divider">*/}
 
                     <li className="nav-item">
                         <Link className="nav-link" to='/voting_creator'>
-                            <span>发起众筹</span></Link>
+                            <span>发起投票</span></Link>
                     </li>
 
                     {/*<!-- Divider -->*/}
@@ -105,14 +112,14 @@ class voting_info extends  React.Component {
                     <li className="nav-item">
                         <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                            aria-expanded="true" aria-controls="collapseTwo">
-                            <span>我的众筹</span>
+                            <span>我的投票</span>
                         </a>
                         <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo"
                              data-parent="#accordionSidebar">
                             <div className="bg-white py-2 collapse-inner rounded">
-                                <h6 className="collapse-header">我的众筹:</h6>
-                                <Link className="collapse-item" to="/mine_voting">我发起的众筹</Link>
-                                <Link className="collapse-item" to="/attend_voting">我参与的众筹</Link>
+                                <h6 className="collapse-header">我的投票:</h6>
+                                <Link className="collapse-item" to="/mine_voting">我发起的投票</Link>
+                                <Link className="collapse-item" to="/attend_voting">我参与的投票</Link>
                             </div>
                         </div>
                     </li>
@@ -170,45 +177,45 @@ class voting_info extends  React.Component {
                             </nav>
 
                         <div class="container-fluid">
-                                    <h1 className="h3 mb-0 text-gray-800">众筹项目详情</h1>
+                                    <h1 className="h3 mb-0 text-gray-800">投票项目详情</h1>
                                 </div>
                                 <div className="card-body">
                                     <div className="table-responsive" class="row">
                                         <div class="col-lg-12">
                                                 <div className="card-body">
-                                                    <h5>众筹项目发起人：<strong>{project.creator_addr}</strong></h5>
+                                                    <h5>投票项目发起人：<strong>{project.creator_addr}</strong></h5>
                                                 </div>
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>众筹项目名称：<strong>{project.title}</strong><span className="badge badge-warning ml-3">募集截止日期：{ddl}</span></h5>
+                                                    <h5>投票项目名称：<strong>{project.title}</strong><span className="badge badge-warning ml-3">募集截止日期：{ddl}</span></h5>
                                                 </div>
                                                 <div className="card-body">
-                                                    <h5>众筹项目状态：<strong>{state}</strong></h5>
+                                                    <h5>投票项目状态：<strong>{state}</strong></h5>
                                                 </div>
 
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>众筹项目目标筹集资金：<strong>{project.target_voting}eth</strong></h5>
+                                                    <h5>投票项目目标投票人数：<strong>{project.target_voting}eth</strong></h5>
                                                 </div>
                                                 <div className="card-body">
-                                                    <h5>众筹项目已筹集资金：<strong>{project.num_voted}eth</strong></h5>
-                                                </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                                <div className="card-body">
-                                                    <h5>众筹项目已使用资金：<strong>{project.usedMoney}eth</strong></h5>
+                                                    <h5>投票项目已投票人数：<strong>{project.num_voted}eth</strong></h5>
                                                 </div>
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>众筹项目投资人数：<strong>{project.voter_num}</strong></h5>
+                                                    <h5>投票项目已使用资金：<strong>{project.usedMoney}eth</strong></h5>
+                                                </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                                <div className="card-body">
+                                                    <h5>投票项目投资人数：<strong>{project.voter_num}</strong></h5>
                                                 </div>
                                         </div>
                                         <div class="col-lg-12">
                                                 <div className="card-body">
-                                                    <h5>众筹项目概述：</h5>
+                                                    <h5>投票项目概述：</h5>
                                                     <p>
                                                         <strong>{project.content}</strong>
                                                     </p>

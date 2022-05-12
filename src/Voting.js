@@ -43,7 +43,7 @@ let abi = [
 			},
 			{
 				"internalType": "uint256",
-				"name": "deadline",
+				"name": "endtime",
 				"type": "uint256"
 			},
 			{
@@ -101,12 +101,12 @@ let abi = [
 			},
 			{
 				"internalType": "uint256",
-				"name": "_goalMoney",
+				"name": "_target_ticket",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "_remainingtime",
+				"name": "_endtime",
 				"type": "uint256"
 			}
 		],
@@ -296,6 +296,6 @@ let abi = [
 		"type": "function"
 	}
 ]
-let address = '0xA90E76c73F3bDcC16d84BDC0910fC472a4c34B97'
+let address = '0xC5bDd8d99f9c9c540FB96Ac0c20f53E8D7af6605'
 let VotingInstance = new web3.eth.Contract(abi, address)
 module.exports = VotingInstance

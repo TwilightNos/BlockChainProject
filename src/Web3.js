@@ -5,7 +5,7 @@ if (window.ethereum) {
 } else if (window.web3) {
     web3 = new Web3(web3.currentProvider)
 } else {
-    alert('你需要先安装MetaMask')
+    alert('MetaMask is needed')
 }
 window.ethereum.enable()
 module.exports = web3
