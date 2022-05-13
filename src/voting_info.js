@@ -16,17 +16,14 @@ class voting_info extends  React.Component {
         this.up=this.up.bind(this);
     }
     handleChange(event){
-        // 读取输入的值
         const name=event.target.name;
         const value=event.target.value;
-        //   更新状态
         this.setState({
             [name]:value
         })
     }
     componentWillMount = async () => {
-        project = {} //清空数组
-        //获取当前的所有地址
+        project = {}
         project = await VotingInstance.methods.all_Votings(this.props.match.params.id).call()
         project.target_voting = web3.utils.fromWei(project.target_voting, 'ether');
         project.num_voted = web3.utils.fromWei(project.num_voted, 'ether')
@@ -34,30 +31,29 @@ class voting_info extends  React.Component {
         ddl = project.endtime
         let current_time = Date.parse(new Date())
         if(project.isSuccess === true){
-            state = "已完成募集"
+            state = "Voting Finished"
         }
         else{
             if(ddl - current_time >= 0){
-                state = "募集中"
+                state = "Voting in Progress"
             }
             else{
-                state = "项目已过期"
+                state = "Project is overdue"
             }
         }
         ddl = (new Date(parseInt(ddl))).toLocaleDateString()
         let accounts = await web3.eth.getAccounts()
         this.setState({
-            // manager: manager,
             accounts: accounts
         })
     };
     async up(){
         if (this.state.tickets === 0){
-            alert('金额必须大于1!')
+            alert('Amount must be more than 1')
         }
         else{
             if(this.state.tickets > (project.target_voting - project.num_voted)){
-                alert('已满足投票要求，无需再投！')
+                alert('The Voting ！')
             }
             else if(this.state.tickets == 1){
                 await VotingInstance.methods.Vote_sender(this.props.match.params.id).send({
@@ -125,7 +121,7 @@ class voting_info extends  React.Component {
 
 									{/*// <!-- Nav Item - Dashboard -->*/}
 									<li className="nav-item  active">
-										<Link className="nav-link" to='/home'>
+										<Link className="nav-link" to='/basic_template'>
 											<span>首页</span></Link>
 									</li>
 
@@ -177,17 +173,12 @@ class voting_info extends  React.Component {
                                                     <h5>投票项目目标投票人数：<strong>{project.target_voting}</strong></h5>
                                                 </div>
                                                 <div className="card-body">
-                                                    <h5>投票项目已投票人数：<strong>{project.num_voted}</strong></h5>
+                                                    <h5>投票项目已投票数：<strong>{project.num_voted}</strong></h5>
                                                 </div>
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>投票项目已使用资金：<strong>{project.confirmed_ticket}eth</strong></h5>
-                                                </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                                <div className="card-body">
-                                                    <h5>投票项目投资人数：<strong>{project.voter_num}</strong></h5>
+                                                    <h5>投票项目投票人数：<strong>{project.voter_num}</strong></h5>
                                                 </div>
                                         </div>
 										<div class="col-lg-6">
@@ -206,7 +197,7 @@ class voting_info extends  React.Component {
                                         <div class="col-lg">
                                             <a href="#" className="btn btn-success btn-icon-split"  style={{float:"center"}}
                                                data-target="#myModal" data-toggle="modal">
-                                                <span className="text">我要投资</span>
+                                                <span className="text">投票</span>
                                             </a>
                                             <div className="modal fade" id="myModal" tabIndex="-1" role="dialog"
                                                  aria-labelledby="myModalLabel" aria-hidden="true">
@@ -214,7 +205,7 @@ class voting_info extends  React.Component {
                                                     <div className="modal-content">
                                                         <div className="modal-header">
                                                             <h4 className="modal-title" id="myModalLabel">
-                                                                请输入投资金额
+                                                                请输入投票数目
                                                             </h4>
                                                             <button type="button" className="close" data-dismiss="modal"
                                                                     aria-hidden="true">
@@ -229,7 +220,7 @@ class voting_info extends  React.Component {
                                                                     data-dismiss="modal">关闭
                                                             </button>
                                                             <button type="button" className="btn btn-warning" data-dismiss="modal" onClick={this.up}>
-                                                                确认投资
+                                                                确认投票
                                                             </button>
                                                         </div>
                                                     </div>

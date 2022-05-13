@@ -1,5 +1,5 @@
 let web3 = require('./Web3')
-let address = '0x0e0E8f6B357120432F104Db2dDA9218316b90337'
+let address = '0x69A9b8d666F1B4623BE1781Ff368A77FE5F4119b'
 let abi =[
 	{
 		"inputs": [

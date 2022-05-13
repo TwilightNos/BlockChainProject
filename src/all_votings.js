@@ -37,21 +37,21 @@ class all_votings extends  React.Component {
         ddl = project.endtime
         let current_time = Date.parse(new Date())
         if(project.isSuccess === true){
-            state = "已完成募集"
+            state = "Voting Finished"
         }
         else{
             if(ddl - current_time >= 0){
-                state = "募集中"
+                state = "Voting in Progress"
             }
             else{
-                state = "项目已过期"
+                state = "Project is overdue"
             }
         }
         return state
     }
     componentWillMount = async () => {
-        projects = [] //清空数组
-        //获取当前的所有地址
+        projects = [] 
+        
         let accounts = await web3.eth.getAccounts()
         let projects_number = await VotingInstance.methods.all_votings_num().call()
         for(let i = 0; i < projects_number; i++){
@@ -59,7 +59,7 @@ class all_votings extends  React.Component {
             projects.push(project)
         }
         this.setState({
-            // manager: manager,
+            
             accounts: accounts
         })
     };
@@ -105,7 +105,7 @@ class all_votings extends  React.Component {
                                     </li>
 
 									<a className="sidebar-brand d-flex align-items-center justify-content-center">
-										<div className="sidebar-brand-text mx-2">投票系统</div>
+										<div className="sidebar-brand-text mx-2">Voting System</div>
 									</a>
 
 									{/*<!-- Divider -->*/}
@@ -114,26 +114,22 @@ class all_votings extends  React.Component {
 									{/*// <!-- Nav Item - Dashboard -->*/}
 									<li className="nav-item  active">
 										<Link className="nav-link" to='/basic_template'>
-											<span>首页</span></Link>
+											<span>Home</span></Link>
 									</li>
 
 									<li className="nav-item">
 										<Link className="nav-link" to='/all_votings'>
-											<span>所有投票</span></Link>
+											<span>All Voting</span></Link>
 									</li>
-									{/*<!-- Divider -->*/}
-									{/*<hr className="sidebar-divider">*/}
-
 									<li className="nav-item">
 										<Link className="nav-link" to='/voting_creator'>
-											<span>发起投票</span></Link>
+											<span>Initiate Voting</span></Link>
 									</li>
-									
                                     <li className="nav-item dropdown no-arrow">
                                         <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span className="mr-2 d-none d-lg-inline text-light small">
-                                                当前账户地址：{this.state.accounts[0]}</span>
+                                                Current Account Address：{this.state.accounts[0]}</span>
                                         </a>
                                     </li>
 
@@ -151,10 +147,10 @@ class all_votings extends  React.Component {
                                             :projects.map((item,index)=>{
                                                 return (
                                                         <div className="card-body">
-                                                            投票项目名称： {item.title}
+                                                            Voting Project Name： {item.title}
                                                             <span className={this.Is_complete_style(index)}>{this.Is_complete(index)}</span>
                                                             <Link className="btn btn-warning" style={{float:"right"}}
-                                                                  to={{ pathname: '/voting_info/' + index}}>查看详情</Link>
+                                                                  to={{ pathname: '/voting_info/' + index}}>Details</Link>
                                                         </div>
                                                 )
                                             },this)

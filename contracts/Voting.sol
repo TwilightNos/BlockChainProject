@@ -11,7 +11,6 @@ contract Voting{
         uint endtime;
         bool isSuccess;
         uint voter_num;
-        uint comment_num;
         mapping(uint => Voter) voters;
     }
 
@@ -64,7 +63,6 @@ contract Voting{
         }
         return tickets;
     }
-    
     function MyCreatedVotings(uint _votingId) public view returns(bool){
         bool check = true;
         if(all_Votings[_votingId].creator_addr != msg.sender){
