@@ -96,7 +96,7 @@ class voting_creator extends  React.Component {
 
 									{/*// <!-- Nav Item - Dashboard -->*/}
 									<li className="nav-item  active">
-										<Link className="nav-link" to='/home'>
+										<Link className="nav-link" to='/basic_template'>
 											<span>首页</span></Link>
 									</li>
 
@@ -110,19 +110,6 @@ class voting_creator extends  React.Component {
 									<li className="nav-item">
 										<Link className="nav-link" to='/voting_creator'>
 											<span>发起投票</span></Link>
-									</li>
-
-									{/*<!-- Divider -->*/}
-									{/*<hr className="sidebar-divider">*/}
-									
-									<li className="nav-item">
-										<Link className="nav-link" to='/mine_voting'>
-											<span>我发起的投票</span></Link>
-									</li>
-									
-									<li className="nav-item">
-										<Link className="nav-link" to='/attend_voting'>
-											<span>我参与的投票</span></Link>
 									</li>
 
                                 </ul>

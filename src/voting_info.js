@@ -28,7 +28,6 @@ class voting_info extends  React.Component {
         project = {} //清空数组
         //获取当前的所有地址
         project = await VotingInstance.methods.all_Votings(this.props.match.params.id).call()
-        project.confirmed_ticket = web3.utils.fromWei(project.confirmed_ticket, 'ether')
         project.target_voting = web3.utils.fromWei(project.target_voting, 'ether');
         project.num_voted = web3.utils.fromWei(project.num_voted, 'ether')
         console.log(project)
@@ -142,19 +141,6 @@ class voting_info extends  React.Component {
 											<span>发起投票</span></Link>
 									</li>
 
-									{/*<!-- Divider -->*/}
-									{/*<hr className="sidebar-divider">*/}
-									
-									<li className="nav-item">
-										<Link className="nav-link" to='/mine_voting'>
-											<span>我发起的投票</span></Link>
-									</li>
-									
-									<li className="nav-item">
-										<Link className="nav-link" to='/attend_voting'>
-											<span>我参与的投票</span></Link>
-									</li>
-
                                     <li className="nav-item dropdown no-arrow">
                                         <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -179,7 +165,7 @@ class voting_info extends  React.Component {
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>投票项目名称：<strong>{project.title}</strong><span className="badge badge-warning ml-3">募集截止日期：{ddl}</span></h5>
+                                                    <h5>投票项目名称：<strong>{project.title}</strong></h5>
                                                 </div>
                                                 <div className="card-body">
                                                     <h5>投票项目状态：<strong>{state}</strong></h5>
@@ -188,10 +174,10 @@ class voting_info extends  React.Component {
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>投票项目目标投票人数：<strong>{project.target_voting}eth</strong></h5>
+                                                    <h5>投票项目目标投票人数：<strong>{project.target_voting}</strong></h5>
                                                 </div>
                                                 <div className="card-body">
-                                                    <h5>投票项目已投票人数：<strong>{project.num_voted}eth</strong></h5>
+                                                    <h5>投票项目已投票人数：<strong>{project.num_voted}</strong></h5>
                                                 </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -202,6 +188,11 @@ class voting_info extends  React.Component {
                                         <div class="col-lg-6">
                                                 <div className="card-body">
                                                     <h5>投票项目投资人数：<strong>{project.voter_num}</strong></h5>
+                                                </div>
+                                        </div>
+										<div class="col-lg-6">
+                                                <div className="card-body">
+                                                    <h5>募集截止日期：<strong>{ddl}</strong></h5>
                                                 </div>
                                         </div>
                                         <div class="col-lg-12">

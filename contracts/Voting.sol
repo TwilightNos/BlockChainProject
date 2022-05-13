@@ -8,7 +8,6 @@ contract Voting{
         string content;
         uint target_voting;
         uint num_voted;
-        uint confirmed_ticket;
         uint endtime;
         bool isSuccess;
         uint voter_num;

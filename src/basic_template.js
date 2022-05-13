@@ -1,69 +1,39 @@
 import React, { Component } from "react";
-import {Link} from "react-router-dom";
-let VotingInstance = require('./Voting')
+import "./App.css";
+import {Link, NavLink, Redirect, Route, Router, Switch} from "react-router-dom";
 let web3 = require('./Web3');
-let project = {}
+let VotingInstance = require('./Voting')
 let projects = []
-let ddl = ''
-let style = ''
-let state = ''
-let indexes = []
-class attend_voting extends  React.Component {
+let count_ongoing = 0
+let finished = 0
+let projects_number = 0
+class basic_template extends Component {
     constructor() {
         super()
         this.state = {
             accounts: ''
         }
     }
-    Is_complete_style(id){
-        project = projects[id]
-        ddl = project.endtime
-        let current_time = Date.parse(new Date())
-        if(project.isSuccess === true){
-            style = "badge badge-info ml-3"
-        }
-        else{
-            if(ddl - current_time >= 0){
-                style = "badge badge-warning ml-3"
-            }
-            else{
-                style = "badge badge-secondary ml-3"
-            }
-        }
-        return style
-    }
-    Is_complete(id){
-        project = projects[id]
-        ddl = project.endtime
-        let current_time = Date.parse(new Date())
-        if(project.isSuccess === true){
-            state = "已完成募集"
-        }
-        else{
-            if(ddl - current_time >= 0){
-                state = "募集中"
-            }
-            else{
-                state = "项目已过期"
-            }
-        }
-        return state
-    }
+
     componentWillMount = async () => {
-        projects = [] //清空数组
         //获取当前的所有地址
+        count_ongoing = 0
+        finished = 0
         let accounts = await web3.eth.getAccounts()
-        let projects_number = await VotingInstance.methods.all_votings_num().call()
+        let temp = await VotingInstance.methods.getBalance().call()
+        temp = await web3.utils.fromWei(temp, 'ether')
+        console.log(temp)
+        projects_number = await VotingInstance.methods.all_votings_num().call()
+        let current_time = Date.parse(new Date())
         for(let i = 0; i < projects_number; i++){
-            let project =await VotingInstance.methods.all_Votings(i).call()
-            let tickets = await VotingInstance.methods.MyVotings(i).call({
-                from: accounts[0]
-            })
-            if(tickets > 0){
-                console.log(i)
-                indexes.push(i)
-                projects.push(project)
+            let project = await VotingInstance.methods.all_Votings(i).call()
+            if (project.isSuccess === true){
+                finished += 1
             }
+            else{
+                count_ongoing += 1
+            }
+            projects.push(project)
         }
         this.setState({
             // manager: manager,
@@ -72,10 +42,15 @@ class attend_voting extends  React.Component {
     };
     render() {
         return (
-            <div id="wrapper">
-                <div id="content-wrapper" className="d-flex flex-column">
-                    <div id="content">
-                        <nav className="navbar navbar-expand navbar-light bg-danger topbar mb-4 static-top shadow">
+            <div>
+                <div id="wrapper">
+
+                    <div id="content-wrapper" className="d-flex flex-column">
+
+
+                        <div id="content">
+
+                            <nav className="navbar navbar-expand navbar-light bg-danger topbar mb-4 static-top shadow">
 
 
                                 <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
@@ -106,7 +81,7 @@ class attend_voting extends  React.Component {
                                             </form>
                                         </div>
                                     </li>
-
+									
 									<a className="sidebar-brand d-flex align-items-center justify-content-center">
 										<div className="sidebar-brand-text mx-2">投票系统</div>
 									</a>
@@ -116,7 +91,7 @@ class attend_voting extends  React.Component {
 
 									{/*// <!-- Nav Item - Dashboard -->*/}
 									<li className="nav-item  active">
-										<Link className="nav-link" to='/home'>
+										<Link className="nav-link" to='/basic_template'>
 											<span>首页</span></Link>
 									</li>
 
@@ -132,19 +107,6 @@ class attend_voting extends  React.Component {
 											<span>发起投票</span></Link>
 									</li>
 
-									{/*<!-- Divider -->*/}
-									{/*<hr className="sidebar-divider">*/}
-									
-									<li className="nav-item">
-										<Link className="nav-link" to='/mine_voting'>
-											<span>我发起的投票</span></Link>
-									</li>
-									
-									<li className="nav-item">
-										<Link className="nav-link" to='/attend_voting'>
-											<span>我参与的投票</span></Link>
-									</li>
-
                                     <li className="nav-item dropdown no-arrow">
                                         <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -157,34 +119,71 @@ class attend_voting extends  React.Component {
 
                             </nav>
 
-                        <div className="container-fluid">
-                            <div className="row">
+                            <div className="container-fluid">
 
-                                <div className="col-lg-12">
-                                    {
-                                        (projects.length === 0)
-                                            ? null
-                                            : projects.map((item, index) => {
-                                                return (
-                                                        <div className="card-body">
-                                                            投票项目名称： {item.title}
-                                                            <span
-                                                                className={this.Is_complete_style(index)}>{this.Is_complete(index)}</span>
-                                                            <Link className="btn btn-warning" style={{float: "right"}}
-                                                                  to={{pathname: '/attend_voting_info/' + indexes[index]}}>查看详情</Link>
-                                                        </div>
-                                                )
-                                            }, this)
-                                    }
 
+                                <div className="d-sm-flex align-items-center justify-content-between mb-4">
+                                    <h1 className="h3 mb-0 text-gray-800">网站总览</h1>
                                 </div>
+
+                                <div className="row">
+                                    <div className="col-xl-12 col-md-6 mb-4">
+										<div className="card-body">
+											<div className="row no-gutters align-items-center">
+													<div
+														className="text-xl font-weight-boldtext-uppercase mb-1">
+														<h5>总项目数: <strong>{projects_number}</strong></h5>
+													</div>
+											</div>
+										</div>
+                                    </div>
+
+
+                                    <div className="col-xl-12 col-md-6 mb-4">
+										<div className="card-body">
+											<div className="row no-gutters align-items-center">
+													<div
+														className="text-xl font-weight-boldtext-uppercase mb-1"> <h5>已筹项目数: <strong>{finished}</strong></h5>
+													</div>
+											</div>
+										</div>
+                                    </div>
+
+
+                                    <div className="col-xl-12 col-md-6 mb-4">
+                                            <div className="card-body">
+                                                <div className="row no-gutters align-items-center">
+                                                        <div
+                                                            className="text-xl font-weight-bold text-uppercase mb-1">
+                                                            <h5>在筹项目数: <strong>{count_ongoing}</strong></h5>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+
+
+
+
                             </div>
+
+
                         </div>
+
                     </div>
+
+
                 </div>
+                <script src="vendor/jquery/jquery.min.js"/>
+                <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"/>
+                <script src="vendor/jquery-easing/jquery.easing.min.js"/>
+                <script src="js/sb-admin-2.min.js"/>
+                <script src="vendor/chart.js/Chart.min.js"/>
+                <script src="js/demo/chart-area-demo.js"/>
+                <script src="js/demo/chart-pie-demo.js"/>
             </div>
         );
     }
 }
 
-export default attend_voting;
+export default basic_template;

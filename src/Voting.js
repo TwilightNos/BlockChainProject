@@ -1,4 +1,5 @@
 let web3 = require('./Web3')
+let address = '0x0e0E8f6B357120432F104Db2dDA9218316b90337'
 let abi =[
 	{
 		"inputs": [
@@ -75,7 +76,7 @@ let abi =[
 			},
 			{
 				"internalType": "uint256",
-				"name": "_endtime",
+				"name": "_remainingtime",
 				"type": "uint256"
 			}
 		],
@@ -123,11 +124,6 @@ let abi =[
 			{
 				"internalType": "uint256",
 				"name": "num_voted",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "confirmed_ticket",
 				"type": "uint256"
 			},
 			{
@@ -181,6 +177,5 @@ let abi =[
 		"type": "function"
 	}
 ]
-let address = '0x0e0E8f6B357120432F104Db2dDA9218316b90337'
 let VotingInstance = new web3.eth.Contract(abi, address)
 module.exports = VotingInstance
