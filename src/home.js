@@ -16,7 +16,6 @@ class home extends Component {
     }
 
     componentWillMount = async () => {
-        //获取当前的所有地址
         count_ongoing = 0
         finished = 0
         let accounts = await web3.eth.getAccounts()
@@ -36,7 +35,6 @@ class home extends Component {
             projects.push(project)
         }
         this.setState({
-            // manager: manager,
             accounts: accounts
         })
     };
@@ -83,7 +81,7 @@ class home extends Component {
                                     </li>
 									
 									<a className="sidebar-brand d-flex align-items-center justify-content-center">
-										<div className="sidebar-brand-text mx-2">投票系统</div>
+										<div className="sidebar-brand-text mx-2">Voting System</div>
 									</a>
 
 									{/*<!-- Divider -->*/}
@@ -92,19 +90,19 @@ class home extends Component {
 									{/*// <!-- Nav Item - Dashboard -->*/}
 									<li className="nav-item  active">
 										<Link className="nav-link" to='/home'>
-											<span>首页</span></Link>
+											<span>Home</span></Link>
 									</li>
 
 									<li className="nav-item">
 										<Link className="nav-link" to='/all_votings'>
-											<span>所有投票</span></Link>
+											<span>All Voting</span></Link>
 									</li>
 									{/*<!-- Divider -->*/}
 									{/*<hr className="sidebar-divider">*/}
 
 									<li className="nav-item">
 										<Link className="nav-link" to='/voting_creator'>
-											<span>发起投票</span></Link>
+											<span>Initiate Voting</span></Link>
 									</li>
 
 									{/*<!-- Divider -->*/}
@@ -112,12 +110,12 @@ class home extends Component {
 									
 									<li className="nav-item">
 										<Link className="nav-link" to='/mine_voting'>
-											<span>我发起的投票</span></Link>
+											<span>Initiated Voting</span></Link>
 									</li>
 									
 									<li className="nav-item">
 										<Link className="nav-link" to='/attend_voting'>
-											<span>我参与的投票</span></Link>
+											<span>Participated Voting</span></Link>
 									</li>
 
 
@@ -125,7 +123,7 @@ class home extends Component {
                                         <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span className="mr-2 d-none d-lg-inline text-light small">
-                                                当前账户地址：{this.state.accounts[0]}</span>
+                                            Current Account Address：{this.state.accounts[0]}</span>
                                         </a>
                                     </li>
 
@@ -137,7 +135,7 @@ class home extends Component {
 
 
                                 <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                                    <h1 className="h3 mb-0 text-gray-800">网站总览</h1>
+                                    <h1 className="h3 mb-0 text-gray-800">Overview</h1>
                                 </div>
 
                                 <div className="row">
@@ -146,7 +144,7 @@ class home extends Component {
 											<div className="row no-gutters align-items-center">
 													<div
 														className="text-xl font-weight-boldtext-uppercase mb-1">
-														<h5>总项目数: <strong>{projects_number}</strong></h5>
+														<h5>Voting Number: <strong>{projects_number}</strong></h5>
 													</div>
 											</div>
 										</div>
@@ -169,7 +167,7 @@ class home extends Component {
                                                 <div className="row no-gutters align-items-center">
                                                         <div
                                                             className="text-xl font-weight-bold text-uppercase mb-1">
-                                                            <h5>在筹项目数: <strong>{count_ongoing}</strong></h5>
+                                                            <h5>Voting in Progress: <strong>{count_ongoing}</strong></h5>
                                                         </div>
                                                 </div>
                                             </div>

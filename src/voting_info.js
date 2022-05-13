@@ -16,17 +16,14 @@ class voting_info extends  React.Component {
         this.up=this.up.bind(this);
     }
     handleChange(event){
-        // 读取输入的值
         const name=event.target.name;
         const value=event.target.value;
-        //   更新状态
         this.setState({
             [name]:value
         })
     }
     componentWillMount = async () => {
-        project = {} //清空数组
-        //获取当前的所有地址
+        project = {} 
         project = await VotingInstance.methods.all_Votings(this.props.match.params.id).call()
         project.confirmed_ticket = web3.utils.fromWei(project.confirmed_ticket, 'ether')
         project.target_voting = web3.utils.fromWei(project.target_voting, 'ether');
@@ -35,30 +32,29 @@ class voting_info extends  React.Component {
         ddl = project.endtime
         let current_time = Date.parse(new Date())
         if(project.isSuccess === true){
-            state = "已完成募集"
+            state = "Voting Finished"
         }
         else{
             if(ddl - current_time >= 0){
-                state = "募集中"
+                state = "Voting in Progress"
             }
             else{
-                state = "项目已过期"
+                state = "Project is overdue"
             }
         }
         ddl = (new Date(parseInt(ddl))).toLocaleDateString()
         let accounts = await web3.eth.getAccounts()
         this.setState({
-            // manager: manager,
             accounts: accounts
         })
     };
     async up(){
         if (this.state.tickets === 0){
-            alert('金额必须大于1!')
+            alert('Amount must be more than 1')
         }
         else{
             if(this.state.tickets > (project.target_voting - project.num_voted)){
-                alert('已满足投票要求，无需再投！')
+                alert('The Voting ！')
             }
             else if(this.state.tickets == 1){
                 await VotingInstance.methods.Vote_sender(this.props.match.params.id).send({
