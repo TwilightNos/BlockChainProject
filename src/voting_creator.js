@@ -47,7 +47,7 @@ class voting_creator extends  React.Component {
                 await VotingInstance.methods.Voting_constructor(accounts[0], this.state.Name, this.state.overview, amount, timestamp).send({
                     from: accounts[0]
                 })
-                alert('恭喜您，发起众筹项目成功！')
+                alert('恭喜您，发起投票项目成功！')
             }
         }
     }
@@ -82,6 +82,7 @@ class voting_creator extends  React.Component {
                                 <span>发起投票</span></Link>
                         </li>
 
+<<<<<<< HEAD
 						<li className="nav-item">
 							<Link className="nav-link" to='/mine_voting'>
 								<span>我发起的投票</span></Link>
@@ -91,6 +92,25 @@ class voting_creator extends  React.Component {
 							<Link className="nav-link" to='/attend_voting'>
 								<span>我参与的投票</span></Link>
 						</li>
+=======
+                        {/*<!-- Divider -->*/}
+                        {/*<hr className="sidebar-divider">*/}
+
+                        <li className="nav-item">
+                            <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                               aria-expanded="true" aria-controls="collapseTwo">
+                                <span>我的投票</span>
+                            </a>
+                            <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo"
+                                 data-parent="#accordionSidebar">
+                                <div className="bg-white py-2 collapse-inner rounded">
+                                    <h6 className="collapse-header">我的投票:</h6>
+                                    <Link className="collapse-item" to="/mine_voting">我发起的投票</Link>
+                                    <Link className="collapse-item" to="/attend_voting">我参与的投票</Link>
+                                </div>
+                            </div>
+                        </li>
+>>>>>>> 0c0eb1ee53a41a37f919412ccdf017cddc6f58d6
 
                 </ul>
 
