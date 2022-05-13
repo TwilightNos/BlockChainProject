@@ -54,82 +54,112 @@ class voting_creator extends  React.Component {
     render() {
         return (
             <div id="wrapper">
+			<div id="content-wrapper" className="d-flex flex-column">
+				<div id="content">
 
-                <ul className="navbar-nav col-xl-1.1 bg-danger sidebar sidebar-dark accordion" id="accordionSidebar">
+                            <nav className="navbar navbar-expand navbar-light bg-danger topbar mb-8 static-top shadow">
 
-                        <a className="sidebar-brand d-flex align-items-center justify-content-center">
-                            <div className="sidebar-brand-text mx-2">投票系统</div>
-                        </a>
 
-                        {/*<!-- Divider -->*/}
-                        {/*<hr className="sidebar-divider my-0">*/}
+                                <button id="sidebarToggleTop" className="btn btn-link d-md-none rounded-circle mr-3">
+                                    <i className="fa fa-bars"/>
+                                </button>
 
-                        {/*// <!-- Nav Item - Dashboard -->*/}
-                        <li className="nav-item  active">
-                            <Link className="nav-link" to='/home'>
-                                <span>首页</span></Link>
-                        </li>
+                                <ul className="navbar-nav">
 
-                        <li className="nav-item">
-                            <Link className="nav-link" to='/all_votings'>
-                                <span>所有投票</span></Link>
-                        </li>
-                        {/*<!-- Divider -->*/}
-                        {/*<hr className="sidebar-divider">*/}
+                                    <li className="nav-item dropdown no-arrow d-sm-none">
+                                        <a className="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i className="fas fa-search fa-fw"/>
+                                        </a>
 
-                        <li className="nav-item">
-                            <Link className="nav-link" to='/voting_creator'>
-                                <span>发起投票</span></Link>
-                        </li>
+                                        <div className="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                             aria-labelledby="searchDropdown">
+                                            <form className="form-inline mr-auto w-100 navbar-search">
+                                                <div className="input-group">
+                                                    <input type="text" className="form-control bg-light border-0 small"
+                                                           placeholder="Search for..." aria-label="Search"
+                                                           aria-describedby="basic-addon2"/>
+                                                    <div className="input-group-append">
+                                                        <button className="btn btn-primary" type="button">
+                                                            <i className="fas fa-search fa-sm"/>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </li>
+									
+									<a className="sidebar-brand d-flex align-items-center justify-content-center">
+										<div className="sidebar-brand-text mx-2">投票系统</div>
+									</a>
 
-						<li className="nav-item">
-							<Link className="nav-link" to='/mine_voting'>
-								<span>我发起的投票</span></Link>
-						</li>
-						
-						<li className="nav-item">
-							<Link className="nav-link" to='/attend_voting'>
-								<span>我参与的投票</span></Link>
-						</li>
+									{/*<!-- Divider -->*/}
+									{/*<hr className="sidebar-divider my-0">*/}
 
-                </ul>
+									{/*// <!-- Nav Item - Dashboard -->*/}
+									<li className="nav-item  active">
+										<Link className="nav-link" to='/home'>
+											<span>首页</span></Link>
+									</li>
 
-                    <div className="card-body p-0">
-                        <div className="row">
-                            <div className="col-lg-2 d-none d-lg-block"/>
-                            <div className="col-lg-8">
-                                <div className="p-5" id="user">
-                                    <div className="text-center">
+									<li className="nav-item">
+										<Link className="nav-link" to='/all_votings'>
+											<span>所有投票</span></Link>
+									</li>
+									{/*<!-- Divider -->*/}
+									{/*<hr className="sidebar-divider">*/}
+
+									<li className="nav-item">
+										<Link className="nav-link" to='/voting_creator'>
+											<span>发起投票</span></Link>
+									</li>
+
+									{/*<!-- Divider -->*/}
+									{/*<hr className="sidebar-divider">*/}
+									
+									<li className="nav-item">
+										<Link className="nav-link" to='/mine_voting'>
+											<span>我发起的投票</span></Link>
+									</li>
+									
+									<li className="nav-item">
+										<Link className="nav-link" to='/attend_voting'>
+											<span>我参与的投票</span></Link>
+									</li>
+
+                                </ul>
+
+                            </nav>
+							
+						<div className="text-center">
                                         <h1 className="h4 text-gray-900 mb-4">发起投票</h1>
                                     </div>
                                     <form className="user">
                                         <div className="form-group row">
                                             <div className="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="text" className="form-control form-control-user" name="Name" placeholder="投票项目名称" value={this.state.Name} onChange={this.handleChange}/>
+                                                <input type="text" className="form-control form-control-user rounded" name="Name" placeholder="投票项目名称" value={this.state.Name} onChange={this.handleChange}/>
                                             </div>
                                             <div className="col-sm-6">
-                                                <input type="number" min="0" className="form-control form-control-user" name="Amount" placeholder="投票项目金额" value={this.state.Amount} onChange={this.handleChange}/>
+                                                <input type="number" min="0" className="form-control form-control-user rounded" name="Amount" placeholder="投票项目金额" value={this.state.Amount} onChange={this.handleChange}/>
                                             </div>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="name">投票截止日期</label>
-                                            <input type="date" className="form-control form-control-user" name="endtime" value={this.state.endtime} onChange={this.handleChange}/>
+                                            <input type="date" className="form-control form-control-user rounded" name="endtime" value={this.state.endtime} onChange={this.handleChange}/>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="name">项目概述</label>
-                                            <textarea className="form-control" rows="5" name="overview" value={this.state.overview} onChange={this.handleChange}/>
+                                            <textarea className="form-control rounded" rows="5" name="overview" value={this.state.overview} onChange={this.handleChange}/>
                                         </div>
                                         <a className="btn btn-warning btn-user btn-block" type='submit' onClick={this.up}>
                                             确认发起
                                         </a>
                                     </form>
 
-                                </div>
-                            </div>
+
                         </div>
-                    </div>
 
-
+				</div>
             </div>
         );
     }

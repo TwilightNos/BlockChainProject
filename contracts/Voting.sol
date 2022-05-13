@@ -34,11 +34,11 @@ contract Voting{
         require(block.timestamp<=all_Votings[_votingId].endtime);
         Voting storage voting = all_Votings[_votingId];
         uint voternum = voting.voter_num + 1;
-        voting.voter_num += 1;
+        voting.voter_num = voting.voter_num + 1;
         Voter storage voter = voting.voters[voternum];
         voter.add = msg.sender;
         voter.ticket = msg.value;
-        voting.num_voted += msg.value;
+        voting.num_voted = voting.num_voted + msg.value;
         if(voting.num_voted >= voting.target_voting)voting.isSuccess=true;
     }
     //创建众筹项目的函数
@@ -54,7 +54,6 @@ contract Voting{
         voting.endtime = _remainingtime;
         return num;
     }
-    
     //申请使用资金的记录
     // struct Announcement{
     //     string content;//申请说明
