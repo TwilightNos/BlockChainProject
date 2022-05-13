@@ -4,7 +4,7 @@ let VotingInstance = require('./Voting')
 let web3 = require('./Web3');
 let project = {}
 let state = ''
-let ddl = ''
+let etime = ''
 class voting_info extends  React.Component {
     constructor() {
         super();
@@ -28,20 +28,20 @@ class voting_info extends  React.Component {
         project.target_voting = web3.utils.fromWei(project.target_voting, 'ether');
         project.num_voted = web3.utils.fromWei(project.num_voted, 'ether')
         console.log(project)
-        ddl = project.endtime
+        etime = project.endtime
         let current_time = Date.parse(new Date())
         if(project.isSuccess === true){
             state = "Voting Finished"
         }
         else{
-            if(ddl - current_time >= 0){
+            if(etime - current_time >= 0){
                 state = "Voting in Progress"
             }
             else{
                 state = "Project is overdue"
             }
         }
-        ddl = (new Date(parseInt(ddl))).toLocaleDateString()
+        etime = (new Date(parseInt(etime))).toLocaleDateString()
         let accounts = await web3.eth.getAccounts()
         this.setState({
             accounts: accounts
@@ -53,24 +53,17 @@ class voting_info extends  React.Component {
         }
         else{
             if(this.state.tickets > (project.target_voting - project.num_voted)){
-                alert('The Voting Requirement has been Satisfied！')
+                alert('The Voting Requirement has been Satisfied!')
             }
-            else if(this.state.tickets == 1){
+            else{
                 await VotingInstance.methods.Vote_sender(this.props.match.params.id).send({
                     from: this.state.accounts[0],
                     value: web3.utils.toWei(this.state.tickets,'ether')
                 })
-                alert('Voting Success1！')
+                alert('Voting Success!')
             }
-            else if(this.state.tickets == 2){
-                await VotingInstance.methods.Vote_sender(this.props.match.params.id).send({
-                    from: this.state.accounts[0],
-                    value: web3.utils.toWei(this.state.tickets,'ether')
-                })
-                alert('Voting Success2！')
-            }
-        }
     }
+}
     render() {
         return (
             <div id="wrapper">
@@ -160,7 +153,7 @@ class voting_info extends  React.Component {
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>Voting Name：<strong>{project.title}</strong><span className="badge badge-warning ml-3">募集截止日期：{ddl}</span></h5>
+                                                    <h5>Voting Name：<strong>{project.title}</strong><span className="badge badge-warning ml-3">Voting Endtime:{etime}</span></h5>
                                                 </div>
                                                 <div className="card-body">
                                                     <h5>Voting Status：<strong>{state}</strong></h5>
@@ -169,15 +162,10 @@ class voting_info extends  React.Component {
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>Voting Target：<strong>{project.target_voting}eth</strong></h5>
+                                                    <h5>Voting Target：<strong>{project.target_voting}</strong></h5>
                                                 </div>
                                                 <div className="card-body">
-                                                    <h5>Number of tickets voted：<strong>{project.num_voted}eth</strong></h5>
-                                                </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                                <div className="card-body">
-                                                    <h5>Tickets already used：<strong>{project.confirmed_ticket}eth</strong></h5>
+                                                    <h5>Number of tickets voted：<strong>{project.num_voted}</strong></h5>
                                                 </div>
                                         </div>
 										<div class="col-lg-6">

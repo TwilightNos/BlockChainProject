@@ -4,7 +4,7 @@ import {Link, NavLink, Redirect, Route, Router, Switch} from "react-router-dom";
 let web3 = require('./Web3');
 let VotingInstance = require('./Voting')
 let projects = []
-let count_ongoing = 0
+let notFinished = 0
 let finished = 0
 let projects_number = 0
 class basic_template extends Component {
@@ -16,7 +16,7 @@ class basic_template extends Component {
     }
 
     componentWillMount = async () => {
-        count_ongoing = 0
+        notFinished = 0
         finished = 0
         let accounts = await web3.eth.getAccounts()
         let temp = await VotingInstance.methods.getBalance().call()
@@ -30,7 +30,7 @@ class basic_template extends Component {
                 finished += 1
             }
             else{
-                count_ongoing += 1
+                notFinished += 1
             }
             projects.push(project)
         }
@@ -97,9 +97,6 @@ class basic_template extends Component {
 										<Link className="nav-link" to='/all_votings'>
 											<span>All Voting</span></Link>
 									</li>
-									{/*<!-- Divider -->*/}
-									{/*<hr className="sidebar-divider">*/}
-
 									<li className="nav-item">
 										<Link className="nav-link" to='/voting_creator'>
 											<span>Initiate Voting</span></Link>
@@ -117,59 +114,42 @@ class basic_template extends Component {
                             </nav>
 
                             <div className="container-fluid">
-
-
                                 <div className="d-sm-flex align-items-center justify-content-between mb-4">
                                     <h1 className="h3 mb-0 text-gray-800">Overview</h1>
                                 </div>
-
                                 <div className="row">
                                     <div className="col-xl-12 col-md-6 mb-4">
 										<div className="card-body">
 											<div className="row no-gutters align-items-center">
 													<div
-														className="text-xl font-weight-boldtext-uppercase mb-1">
+														className="text-xl font-weight-bold mb-1">
 														<h5>Voting Number: <strong>{projects_number}</strong></h5>
 													</div>
 											</div>
 										</div>
                                     </div>
-
-
                                     <div className="col-xl-12 col-md-6 mb-4">
 										<div className="card-body">
 											<div className="row no-gutters align-items-center">
 													<div
-														className="text-xl font-weight-boldtext-uppercase mb-1"> <h5>Finished Voting:<strong>{finished}</strong></h5>
+														className="text-xl font-weight-bold mb-1"> <h5>Finished Voting:<strong>{finished}</strong></h5>
 													</div>
 											</div>
 										</div>
                                     </div>
-
-
                                     <div className="col-xl-12 col-md-6 mb-4">
                                             <div className="card-body">
                                                 <div className="row no-gutters align-items-center">
                                                         <div
-                                                            className="text-xl font-weight-bold text-uppercase mb-1">
-                                                            <h5>Voting in Progress: <strong>{count_ongoing}</strong></h5>
+                                                            className="text-xl font-weight-bold mb-1"><h5>Voting in Progress: <strong>{notFinished}</strong></h5>
                                                         </div>
                                                 </div>
                                             </div>
                                     </div>
                                 </div>
-
-
-
-
                             </div>
-
-
                         </div>
-
                     </div>
-
-
                 </div>
                 <script src="vendor/jquery/jquery.min.js"/>
                 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"/>

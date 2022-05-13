@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 let VotingInstance = require('./Voting')
 let web3 = require('./Web3');
 let projects = []
-let ddl = ''
+let etime = ''
 let state = ''
 let style = ''
 let project = {}
@@ -16,13 +16,13 @@ class all_votings extends  React.Component {
     }
     Is_complete_style(id){
         project = projects[id]
-        ddl = project.endtime
+        etime = project.endtime
         let current_time = Date.parse(new Date())
         if(project.isSuccess === true){
             style = "badge badge-info ml-3"
         }
         else{
-            if(ddl - current_time >= 0){
+            if(etime - current_time >= 0){
                 style = "badge badge-warning ml-3"
             }
             else{
@@ -34,13 +34,13 @@ class all_votings extends  React.Component {
     Is_complete(id){
         project = projects[id]
         console.log(project)
-        ddl = project.endtime
+        etime = project.endtime
         let current_time = Date.parse(new Date())
         if(project.isSuccess === true){
             state = "Voting Finished"
         }
         else{
-            if(ddl - current_time >= 0){
+            if(etime - current_time >= 0){
                 state = "Voting in Progress"
             }
             else{
@@ -50,8 +50,7 @@ class all_votings extends  React.Component {
         return state
     }
     componentWillMount = async () => {
-        projects = [] 
-        
+        projects = []
         let accounts = await web3.eth.getAccounts()
         let projects_number = await VotingInstance.methods.all_votings_num().call()
         for(let i = 0; i < projects_number; i++){
@@ -59,7 +58,6 @@ class all_votings extends  React.Component {
             projects.push(project)
         }
         this.setState({
-            
             accounts: accounts
         })
     };
@@ -107,11 +105,6 @@ class all_votings extends  React.Component {
 									<a className="sidebar-brand d-flex align-items-center justify-content-center">
 										<div className="sidebar-brand-text mx-2">Voting System</div>
 									</a>
-
-									{/*<!-- Divider -->*/}
-									{/*<hr className="sidebar-divider my-0">*/}
-
-									{/*// <!-- Nav Item - Dashboard -->*/}
 									<li className="nav-item  active">
 										<Link className="nav-link" to='/basic_template'>
 											<span>Home</span></Link>
