@@ -45,56 +45,6 @@ class home extends Component {
             <div>
                 <div id="wrapper">
 
-<<<<<<< HEAD
-=======
-                    <ul className="navbar-nav col-xl-1 bg-warning sidebar sidebar-dark accordion" id="accordionSidebar">
-
-                        <a className="sidebar-brand d-flex align-items-center justify-content-center">
-                            <div className="sidebar-brand-text mx-2">投票系统</div>
-                        </a>
-
-                        {/*<!-- Divider -->*/}
-                        {/*<hr className="sidebar-divider my-0">*/}
-
-                        {/*// <!-- Nav Item - Dashboard -->*/}
-                        <li className="nav-item  active">
-                            <Link className="nav-link" to='/home'>
-                                <span>首页</span></Link>
-                        </li>
-
-                        <li className="nav-item">
-                            <Link className="nav-link" to='/all_votings'>
-                                <span>所有投票</span></Link>
-                        </li>
-                        {/*<!-- Divider -->*/}
-                        {/*<hr className="sidebar-divider">*/}
-
-                        <li className="nav-item">
-                            <Link className="nav-link" to='/voting_creator'>
-                                <span>发起投票</span></Link>
-                        </li>
-
-                        {/*<!-- Divider -->*/}
-                        {/*<hr className="sidebar-divider">*/}
-
-                        <li className="nav-item">
-                            <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                               aria-expanded="true" aria-controls="collapseTwo">
-                                <span>我的投票</span>
-                            </a>
-                            <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo"
-                                 data-parent="#accordionSidebar">
-                                <div className="bg-white py-2 collapse-inner rounded">
-                                    <h6 className="collapse-header">我的投票:</h6>
-                                    <Link className="collapse-item" to="/mine_voting">我发起的投票</Link>
-                                    <Link className="collapse-item" to="/attend_voting">我参与的投票</Link>
-                                </div>
-                            </div>
-                        </li>
-
-                    </ul>
-
->>>>>>> 0c0eb1ee53a41a37f919412ccdf017cddc6f58d6
                     <div id="content-wrapper" className="d-flex flex-column">
 
 
