@@ -1,7 +1,96 @@
 let web3 = require('./Web3')
-let abi = [
+let abi =[
 	{
-		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_votingId",
+				"type": "uint256"
+			}
+		],
+		"name": "MyCreatedVotings",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_votingId",
+				"type": "uint256"
+			}
+		],
+		"name": "MyVotings",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_votingId",
+				"type": "uint256"
+			}
+		],
+		"name": "Vote_sender",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address payable",
+				"name": "_initiator",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_title",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_content",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_goalMoney",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_remainingtime",
+				"type": "uint256"
+			}
+		],
+		"name": "Voting_constructor",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -38,12 +127,12 @@ let abi = [
 			},
 			{
 				"internalType": "uint256",
-				"name": "usedMoney",
+				"name": "confirmed_ticket",
 				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
-				"name": "deadline",
+				"name": "endtime",
 				"type": "uint256"
 			},
 			{
@@ -62,12 +151,10 @@ let abi = [
 				"type": "uint256"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
 		"inputs": [],
 		"name": "all_votings_num",
 		"outputs": [
@@ -77,211 +164,10 @@ let abi = [
 				"type": "uint256"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "address payable",
-				"name": "_initiator",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_title",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_content",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_goalMoney",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_remainingtime",
-				"type": "uint256"
-			}
-		],
-		"name": "Voting_constructor",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_votingId",
-				"type": "uint256"
-			}
-		],
-		"name": "Vote_sender",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_votingId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_content",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			}
-		],
-		"name": "Announcement_Creator",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_votingId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_announcementId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "_isAgree",
-				"type": "bool"
-			}
-		],
-		"name": "confirmAnnouncement",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_votingId",
-				"type": "uint256"
-			}
-		],
-		"name": "MyVotings",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_votingId",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_announcementId",
-				"type": "uint256"
-			}
-		],
-		"name": "receiveAnnouncement",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_votingId",
-				"type": "uint256"
-			}
-		],
-		"name": "num_of_Announcements",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
 		"inputs": [],
 		"name": "getBalance",
 		"outputs": [
@@ -291,11 +177,10 @@ let abi = [
 				"type": "uint256"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	}
 ]
-let address = '0xA90E76c73F3bDcC16d84BDC0910fC472a4c34B97'
+let address = '0x0e0E8f6B357120432F104Db2dDA9218316b90337'
 let VotingInstance = new web3.eth.Contract(abi, address)
 module.exports = VotingInstance

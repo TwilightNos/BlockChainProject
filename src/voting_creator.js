@@ -11,7 +11,7 @@ class voting_creator extends  React.Component {
         this.state={
             Name:"",
             Amount:0,
-            deadline:"",
+            endtime:"",
             overview:""
         }
         this.handleChange=this.handleChange.bind(this);
@@ -27,11 +27,11 @@ class voting_creator extends  React.Component {
         })
     }
     async up(){
-        if (this.state.Name === "" || this.state.Amount === "" || this.state.deadline === "" || this.state.overview === ""){
+        if (this.state.Name === "" || this.state.Amount === "" || this.state.endtime === "" || this.state.overview === ""){
             alert('请填写表单中的所有内容！')
         }
         else{
-            let timestamp = new Date(this.state.deadline).getTime();
+            let timestamp = new Date(this.state.endtime).getTime();
             console.log(timestamp);
             let a=(new Date()).toLocaleDateString();//获取当前日期
             a =a.replace(/\//g,'-');
@@ -121,7 +121,7 @@ class voting_creator extends  React.Component {
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="name">众筹截止日期</label>
-                                            <input type="date" className="form-control form-control-user" name="deadline" value={this.state.deadline} onChange={this.handleChange}/>
+                                            <input type="date" className="form-control form-control-user" name="endtime" value={this.state.endtime} onChange={this.handleChange}/>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="name">项目概述</label>

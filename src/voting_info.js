@@ -28,11 +28,11 @@ class voting_info extends  React.Component {
         project = {} //清空数组
         //获取当前的所有地址
         project = await VotingInstance.methods.all_Votings(this.props.match.params.id).call()
-        project.usedMoney = web3.utils.fromWei(project.usedMoney, 'ether')
+        project.confirmed_ticket = web3.utils.fromWei(project.confirmed_ticket, 'ether')
         project.target_voting = web3.utils.fromWei(project.target_voting, 'ether');
         project.num_voted = web3.utils.fromWei(project.num_voted, 'ether')
         console.log(project)
-        ddl = project.deadline
+        ddl = project.endtime
         let current_time = Date.parse(new Date())
         if(project.isSuccess === true){
             state = "已完成募集"
@@ -198,7 +198,7 @@ class voting_info extends  React.Component {
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>众筹项目已使用资金：<strong>{project.usedMoney}eth</strong></h5>
+                                                    <h5>众筹项目已使用资金：<strong>{project.confirmed_ticket}eth</strong></h5>
                                                 </div>
                                         </div>
                                         <div class="col-lg-6">

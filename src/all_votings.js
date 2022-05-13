@@ -16,7 +16,7 @@ class all_votings extends  React.Component {
     }
     Is_complete_style(id){
         project = projects[id]
-        ddl = project.deadline
+        ddl = project.endtime
         let current_time = Date.parse(new Date())
         if(project.isSuccess === true){
             style = "badge badge-info ml-3"
@@ -34,7 +34,7 @@ class all_votings extends  React.Component {
     Is_complete(id){
         project = projects[id]
         console.log(project)
-        ddl = project.deadline
+        ddl = project.endtime
         let current_time = Date.parse(new Date())
         if(project.isSuccess === true){
             state = "已完成募集"

@@ -32,7 +32,7 @@ class mine_voting_info extends  React.Component {
         project = {} //清空
         comments = []
         project = await VotingInstance.methods.all_Votings(this.props.match.params.id).call()
-        project.usedMoney = web3.utils.fromWei(project.usedMoney, 'ether')
+        project.confirmed_ticket = web3.utils.fromWei(project.confirmed_ticket, 'ether')
         project.target_voting = web3.utils.fromWei(project.target_voting, 'ether');
         project.num_voted = web3.utils.fromWei(project.num_voted, 'ether')
         let proposal_length = project.comment_num
@@ -68,7 +68,7 @@ class mine_voting_info extends  React.Component {
             }
             comments.push(announcement)
         }
-        ddl = project.deadline
+        ddl = project.endtime
         let current_time = Date.parse(new Date())
         if(project.isSuccess === true){
             state = "已完成募集"
@@ -93,8 +93,8 @@ class mine_voting_info extends  React.Component {
         if (this.state.tickets === 0){
             alert('金额必须大于0!')
         }
-        else if((project.num_voted - project.usedMoney) < this.state.tickets){
-            alert('您最多可使用' + (project.num_voted - project.usedMoney) + '以太坊')
+        else if((project.num_voted - project.confirmed_ticket) < this.state.tickets){
+            alert('您最多可使用' + (project.num_voted - project.confirmed_ticket) + '以太坊')
         }
         else{
             let a = await web3.utils.toWei(this.state.tickets, 'ether')
@@ -271,12 +271,12 @@ class mine_voting_info extends  React.Component {
                                                     <h5>众筹项目目标筹集资金：<strong>{project.target_voting}eth</strong></h5>
                                                 </div>
                                                 <div className="card-body">
-                                                    <h5>众筹项目可用资金：<strong>{project.num_voted - project.usedMoney}eth</strong></h5>
+                                                    <h5>众筹项目可用资金：<strong>{project.num_voted - project.confirmed_ticket}eth</strong></h5>
                                                 </div>
                                         </div>
                                         <div className="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>众筹项目已使用资金：<strong>{project.usedMoney}eth</strong></h5>
+                                                    <h5>众筹项目已使用资金：<strong>{project.confirmed_ticket}eth</strong></h5>
                                                 </div>
                                         </div>
                                         <div className="col-lg-6">

@@ -17,7 +17,7 @@ class mine_voting extends  React.Component {
     }
     Is_complete_style(id){
         project = projects[id]
-        ddl = project.deadline
+        ddl = project.endtime
         let current_time = Date.parse(new Date())
         if(project.isSuccess === true){
             style = "badge badge-info ml-3"
@@ -34,7 +34,7 @@ class mine_voting extends  React.Component {
     }
     Is_complete(id){
         project = projects[id]
-        ddl = project.deadline
+        ddl = project.endtime
         let current_time = Date.parse(new Date())
         if(project.isSuccess === true){
             state = "已完成募集"
@@ -56,7 +56,7 @@ class mine_voting extends  React.Component {
         let projects_number = await VotingInstance.methods.all_votings_num().call()
         for(let i = 0; i < projects_number; i++){
             let project =await VotingInstance.methods.all_Votings(i).call()
-            project.usedMoney = web3.utils.fromWei(project.usedMoney, 'ether')
+            project.confirmed_ticket = web3.utils.fromWei(project.confirmed_ticket, 'ether')
             project.num_voted = web3.utils.fromWei(project.num_voted, 'ether')
             if(project.creator_addr === accounts[0]){
                 indexes.push(i)
