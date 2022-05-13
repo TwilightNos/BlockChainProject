@@ -198,49 +198,6 @@ class mine_voting_info extends  React.Component {
 
                         <div class="container-fluid">
                                 <div className="card-header py-3">
-                                    <h3 className="m-0 font-weight-bold">投票项目详情 <a href="#" className="btn btn-warning btn-icon-split" style={{float: "right"}}
-                                                                                                data-target="#myModal" data-toggle="modal">
-                                        <span className="text">发起使用申请</span>
-                                    </a></h3>
-
-                                    <div className="modal fade" id="myModal" tabIndex="-1" role="dialog"
-                                         aria-labelledby="myModalLabel" aria-hidden="true">
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h4 className="modal-title" id="myModalLabel">
-                                                        请输入申请金额和用途
-                                                    </h4>
-                                                    <button type="button" className="close" data-dismiss="modal"
-                                                            aria-hidden="true">
-                                                        &times;
-                                                    </button>
-                                                </div>
-                                                <div className="modal-body">
-                                                    <label htmlFor="name">申请金额</label>
-                                                    <input type="number" min="0"
-                                                           className="form-control form-control-user" name="tickets"
-                                                           value={this.state.tickets} onChange={this.handleChange}/>
-                                                </div>
-                                                <div className="modal-body">
-                                                    <label htmlFor="name">使用去向</label>
-                                                    <textarea className="form-control" rows="5" name="content"
-                                                              value={this.state.overview}
-                                                              onChange={this.handleChange}/>
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <a className="btn btn-secondary btn-user btn-block"
-                                                       type='submit' data-dismiss="modal">
-                                                        关闭
-                                                    </a>
-                                                    <a className="btn btn-warning btn-user btn-block" type='submit'
-                                                       onClick={this.up} data-dismiss="modal">
-                                                        确认提交
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 <div className="card-body">
                                     <div className="table-responsive" class="row">
                                         <div className="col-lg-12">
@@ -250,7 +207,7 @@ class mine_voting_info extends  React.Component {
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>投票项目名称：<strong>{project.title}</strong><span className="badge badge-warning ml-3">募集截止日期：{ddl}</span></h5>
+                                                    <h5>投票项目名称：<strong>{project.title}</strong></h5>
                                                 </div>
                                                 <div className="card-body">
                                                     <h5>投票项目状态：<strong>{state}</strong></h5>
@@ -261,17 +218,22 @@ class mine_voting_info extends  React.Component {
                                                     <h5>投票项目目标投票人数：<strong>{project.target_voting}eth</strong></h5>
                                                 </div>
                                                 <div className="card-body">
-                                                    <h5>投票项目可用资金：<strong>{project.num_voted - project.confirmed_ticket}eth</strong></h5>
+                                                    <h5>支持票数：<strong>{project.num_voted - project.usedMoney}eth</strong></h5>
                                                 </div>
                                         </div>
                                         <div className="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>投票项目已使用资金：<strong>{project.confirmed_ticket}eth</strong></h5>
+                                                    <h5>投票项目已使用资金：<strong>{project.usedMoney}eth</strong></h5>
                                                 </div>
                                         </div>
                                         <div className="col-lg-6">
                                                 <div className="card-body">
                                                     <h5>投票项目投资人数：<strong>{project.voter_num}</strong></h5>
+                                                </div>
+                                        </div>
+										<div className="col-lg-6">
+                                                <div className="card-body">
+                                                    <h5>募集截止日期：<strong>{ddl}</strong></h5>
                                                 </div>
                                         </div>
                                         <div className="col-lg-12">
@@ -286,88 +248,6 @@ class mine_voting_info extends  React.Component {
                                     </div>
                                 </div>
                         </div>
-                                <div className="card-header py-3">
-                                    <div className="container-fluid">
-                                        <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                                            <h5 className="m-0 font-weight-bold">使用情况详情</h5>
-                                        </div>
-                                        <div className="col-lg-12">
-                                            {
-                                                (comments.length===0)
-                                                    ?null
-                                                    :comments.map((item,index)=>{
-                                                        return (
-                                                                <div className="card-body">
-                                                                    <div className="row">
-                                                                        <div className="col-xl-6 col-md-6 mb-4">
-                                                                                <div className="card-body">
-                                                                                    <div className="row no-gutters align-items-center">
-                                                                                        <div className="col mr-2">
-                                                                                            <div
-                                                                                                className="text-xs font-weight-bold text-uppercase mb-1">
-                                                                                                申请金额
-                                                                                            </div>
-                                                                                            <div className="h5 mb-0 font-weight-bold text-gray-800">{item.amount}eth</div>
-                                                                                        </div>
-                                                                                        <div className="col-auto">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                        </div>
-                                                                        {/* <div className="col-xl-6 col-md-6 mb-4">
-                                                                                <div className="card-body">
-                                                                                    <div className="row no-gutters align-items-center">
-                                                                                        <div className="col mr-2">
-                                                                                            <div
-                                                                                                className="text-xs font-weight-bold  text-uppercase mb-1">同意百分比
-                                                                                            </div>
-                                                                                            <div className="row no-gutters align-items-center">
-                                                                                                <div className="col-auto">
-                                                                                                    <div
-                                                                                                        className="h5 mb-0 mr-3 font-weight-bold text-gray-800">{(item.agreeAmount/item.total).toFixed(4)*100}%
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div className="col">
-                                                                                                    <div className="progress progress-sm mr-2">
-                                                                                                        <div className="progress-bar bg-info" role="progressbar"
-                                                                                                             style={{width: (item.agreeAmount/item.total)*100 + '%'}} aria-valuenow="50"
-                                                                                                             aria-valuemin="0"
-                                                                                                             aria-valuemax="100"/>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div className="col-auto">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                        </div> */}
-                                                                        <div className="col-xl-12 col-md-6 mb-4">
-                                                                                <div className="card-body">
-                                                                                    <div className="row no-gutters align-items-center">
-                                                                                        <div className="col mr-2">
-                                                                                            <div
-                                                                                                className="text-xs font-weight-bold text-uppercase mb-1">
-                                                                                                使用说明
-                                                                                            </div>
-                                                                                            <div className="h5 mb-0 font-weight-bold text-gray-800">{item.content}</div>
-                                                                                        </div>
-                                                                                        <div className="col-auto">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                    </div>
-                                                                </div>
-                                                        )
-                                                    },this)
-                                            }
-                                        </div>
-
-                                    </div>
-                                    <div>
-                    </div>
-                </div>
                         </div>
                     </div>
                 </div>

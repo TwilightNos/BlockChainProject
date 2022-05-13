@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import {Link} from "react-router-dom";
-import ReactDOM from 'react-dom';
-import FundingContract from "./contracts/Voting.json";
 let VotingInstance = require('./Voting')
 let web3 = require('./Web3');
 class voting_creator extends  React.Component {

@@ -75,7 +75,7 @@ let abi =[
 			},
 			{
 				"internalType": "uint256",
-				"name": "_remainingtime",
+				"name": "_endtime",
 				"type": "uint256"
 			}
 		],
