@@ -55,10 +55,10 @@ class voting_creator extends  React.Component {
         return (
             <div id="wrapper">
 
-                <ul className="navbar-nav col-xl-1 bg-warning sidebar sidebar-dark accordion" id="accordionSidebar">
+                <ul className="navbar-nav col-xl-1.1 bg-danger sidebar sidebar-dark accordion" id="accordionSidebar">
 
                         <a className="sidebar-brand d-flex align-items-center justify-content-center">
-                            <div className="sidebar-brand-text mx-2">众筹系统</div>
+                            <div className="sidebar-brand-text mx-2">投票系统</div>
                         </a>
 
                         {/*<!-- Divider -->*/}
@@ -72,33 +72,25 @@ class voting_creator extends  React.Component {
 
                         <li className="nav-item">
                             <Link className="nav-link" to='/all_votings'>
-                                <span>所有众筹</span></Link>
+                                <span>所有投票</span></Link>
                         </li>
                         {/*<!-- Divider -->*/}
                         {/*<hr className="sidebar-divider">*/}
 
                         <li className="nav-item">
                             <Link className="nav-link" to='/voting_creator'>
-                                <span>发起众筹</span></Link>
+                                <span>发起投票</span></Link>
                         </li>
 
-                        {/*<!-- Divider -->*/}
-                        {/*<hr className="sidebar-divider">*/}
-
-                        <li className="nav-item">
-                            <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                               aria-expanded="true" aria-controls="collapseTwo">
-                                <span>我的众筹</span>
-                            </a>
-                            <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo"
-                                 data-parent="#accordionSidebar">
-                                <div className="bg-white py-2 collapse-inner rounded">
-                                    <h6 className="collapse-header">我的众筹:</h6>
-                                    <Link className="collapse-item" to="/mine_voting">我发起的众筹</Link>
-                                    <Link className="collapse-item" to="/attend_voting">我参与的众筹</Link>
-                                </div>
-                            </div>
-                        </li>
+						<li className="nav-item">
+							<Link className="nav-link" to='/mine_voting'>
+								<span>我发起的投票</span></Link>
+						</li>
+						
+						<li className="nav-item">
+							<Link className="nav-link" to='/attend_voting'>
+								<span>我参与的投票</span></Link>
+						</li>
 
                 </ul>
 
@@ -108,19 +100,19 @@ class voting_creator extends  React.Component {
                             <div className="col-lg-8">
                                 <div className="p-5" id="user">
                                     <div className="text-center">
-                                        <h1 className="h4 text-gray-900 mb-4">发起众筹</h1>
+                                        <h1 className="h4 text-gray-900 mb-4">发起投票</h1>
                                     </div>
                                     <form className="user">
                                         <div className="form-group row">
                                             <div className="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="text" className="form-control form-control-user" name="Name" placeholder="众筹项目名称" value={this.state.Name} onChange={this.handleChange}/>
+                                                <input type="text" className="form-control form-control-user" name="Name" placeholder="投票项目名称" value={this.state.Name} onChange={this.handleChange}/>
                                             </div>
                                             <div className="col-sm-6">
-                                                <input type="number" min="0" className="form-control form-control-user" name="Amount" placeholder="众筹项目金额" value={this.state.Amount} onChange={this.handleChange}/>
+                                                <input type="number" min="0" className="form-control form-control-user" name="Amount" placeholder="投票项目金额" value={this.state.Amount} onChange={this.handleChange}/>
                                             </div>
                                         </div>
                                         <div className="form-group">
-                                            <label htmlFor="name">众筹截止日期</label>
+                                            <label htmlFor="name">投票截止日期</label>
                                             <input type="date" className="form-control form-control-user" name="endtime" value={this.state.endtime} onChange={this.handleChange}/>
                                         </div>
                                         <div className="form-group">

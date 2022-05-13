@@ -40,9 +40,9 @@ class mine_voting_info extends  React.Component {
             let announcement = {
                 content:'',
                 amount:0,
-                agreeAmount:0,
-                disAmount:0,
-                goal:0,
+                // agreeAmount:0,
+                // disAmount:0,
+                // goal:0,
                 isAgreed:false,
                 p_state:'',
                 total:0
@@ -53,13 +53,13 @@ class mine_voting_info extends  React.Component {
             announcement.amount = result[1]
             announcement.amount = web3.utils.fromWei(announcement.amount, 'ether')
             console.log(announcement.amount)
-            announcement.agreeAmount = result[2]
-            announcement.agreeAmount = web3.utils.fromWei(announcement.agreeAmount, 'ether')
-            announcement.disAmount = result[3]
-            announcement.goal = result[4]
-            announcement.goal = web3.utils.fromWei(announcement.goal, 'ether')
-            announcement.total = 2 * announcement.goal
-            announcement.isAgreed = result[5]
+            // announcement.agreeAmount = result[2]
+            // announcement.agreeAmount = web3.utils.fromWei(announcement.agreeAmount, 'ether')
+            // announcement.disAmount = result[3]
+            // announcement.goal = result[4]
+            // announcement.goal = web3.utils.fromWei(announcement.goal, 'ether')
+            // announcement.total = 2 * announcement.goal
+            announcement.isAgreed = result[2]
             if(announcement.isAgreed){
                 announcement.p_state = "已批准"
             }
@@ -109,53 +109,6 @@ class mine_voting_info extends  React.Component {
         return (
             <div id="wrapper">
 
-                <ul className="navbar-nav col-xl-1 bg-warning sidebar sidebar-dark accordion" id="accordionSidebar">
-
-                        <a className="sidebar-brand d-flex align-items-center justify-content-center">
-                            <div className="sidebar-brand-text mx-2">众筹系统</div>
-                        </a>
-
-                        {/*<!-- Divider -->*/}
-                        {/*<hr className="sidebar-divider my-0">*/}
-
-                        {/*// <!-- Nav Item - Dashboard -->*/}
-                        <li className="nav-item  active">
-                            <Link className="nav-link" to='/home'>
-                                <span>首页</span></Link>
-                        </li>
-
-                        <li className="nav-item">
-                            <Link className="nav-link" to='/all_votings'>
-                                <span>所有众筹</span></Link>
-                        </li>
-                        {/*<!-- Divider -->*/}
-                        {/*<hr className="sidebar-divider">*/}
-
-                        <li className="nav-item">
-                            <Link className="nav-link" to='/voting_creator'>
-                                <span>发起众筹</span></Link>
-                        </li>
-
-                        {/*<!-- Divider -->*/}
-                        {/*<hr className="sidebar-divider">*/}
-
-                        <li className="nav-item">
-                            <a className="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                               aria-expanded="true" aria-controls="collapseTwo">
-                                <span>我的众筹</span>
-                            </a>
-                            <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo"
-                                 data-parent="#accordionSidebar">
-                                <div className="bg-white py-2 collapse-inner rounded">
-                                    <h6 className="collapse-header">我的众筹:</h6>
-                                    <Link className="collapse-item" to="/mine_voting">我发起的众筹</Link>
-                                    <Link className="collapse-item" to="/attend_voting">我参与的众筹</Link>
-                                </div>
-                            </div>
-                        </li>
-
-                    </ul>
-
                 <div id="content-wrapper" className="d-flex flex-column">
 
 
@@ -193,6 +146,43 @@ class mine_voting_info extends  React.Component {
                                         </div>
                                     </li>
 
+									<a className="sidebar-brand d-flex align-items-center justify-content-center">
+										<div className="sidebar-brand-text mx-2">投票系统</div>
+									</a>
+
+									{/*<!-- Divider -->*/}
+									{/*<hr className="sidebar-divider my-0">*/}
+
+									{/*// <!-- Nav Item - Dashboard -->*/}
+									<li className="nav-item  active">
+										<Link className="nav-link" to='/home'>
+											<span>首页</span></Link>
+									</li>
+
+									<li className="nav-item">
+										<Link className="nav-link" to='/all_votings'>
+											<span>所有投票</span></Link>
+									</li>
+									{/*<!-- Divider -->*/}
+									{/*<hr className="sidebar-divider">*/}
+
+									<li className="nav-item">
+										<Link className="nav-link" to='/voting_creator'>
+											<span>发起投票</span></Link>
+									</li>
+
+									{/*<!-- Divider -->*/}
+									{/*<hr className="sidebar-divider">*/}
+									
+									<li className="nav-item">
+										<Link className="nav-link" to='/mine_voting'>
+											<span>我发起的投票</span></Link>
+									</li>
+									
+									<li className="nav-item">
+										<Link className="nav-link" to='/attend_voting'>
+											<span>我参与的投票</span></Link>
+									</li>
 
                                     <li className="nav-item dropdown no-arrow">
                                         <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -208,7 +198,7 @@ class mine_voting_info extends  React.Component {
 
                         <div class="container-fluid">
                                 <div className="card-header py-3">
-                                    <h3 className="m-0 font-weight-bold">众筹项目详情 <a href="#" className="btn btn-warning btn-icon-split" style={{float: "right"}}
+                                    <h3 className="m-0 font-weight-bold">投票项目详情 <a href="#" className="btn btn-warning btn-icon-split" style={{float: "right"}}
                                                                                                 data-target="#myModal" data-toggle="modal">
                                         <span className="text">发起使用申请</span>
                                     </a></h3>
@@ -255,38 +245,38 @@ class mine_voting_info extends  React.Component {
                                     <div className="table-responsive" class="row">
                                         <div className="col-lg-12">
                                                 <div className="card-body">
-                                                    <h5>众筹项目发起人：<strong>{project.creator_addr}</strong></h5>
+                                                    <h5>投票项目发起人：<strong>{project.creator_addr}</strong></h5>
                                                 </div>
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>众筹项目名称：<strong>{project.title}</strong><span className="badge badge-warning ml-3">募集截止日期：{ddl}</span></h5>
+                                                    <h5>投票项目名称：<strong>{project.title}</strong><span className="badge badge-warning ml-3">募集截止日期：{ddl}</span></h5>
                                                 </div>
                                                 <div className="card-body">
-                                                    <h5>众筹项目状态：<strong>{state}</strong></h5>
-                                                </div>
-                                        </div>
-                                        <div className="col-lg-6">
-                                                <div className="card-body">
-                                                    <h5>众筹项目目标筹集资金：<strong>{project.target_voting}eth</strong></h5>
-                                                </div>
-                                                <div className="card-body">
-                                                    <h5>众筹项目可用资金：<strong>{project.num_voted - project.confirmed_ticket}eth</strong></h5>
+                                                    <h5>投票项目状态：<strong>{state}</strong></h5>
                                                 </div>
                                         </div>
                                         <div className="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>众筹项目已使用资金：<strong>{project.confirmed_ticket}eth</strong></h5>
+                                                    <h5>投票项目目标投票人数：<strong>{project.target_voting}eth</strong></h5>
+                                                </div>
+                                                <div className="card-body">
+                                                    <h5>投票项目可用资金：<strong>{project.num_voted - project.confirmed_ticket}eth</strong></h5>
                                                 </div>
                                         </div>
                                         <div className="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>众筹项目投资人数：<strong>{project.voter_num}</strong></h5>
+                                                    <h5>投票项目已使用资金：<strong>{project.confirmed_ticket}eth</strong></h5>
+                                                </div>
+                                        </div>
+                                        <div className="col-lg-6">
+                                                <div className="card-body">
+                                                    <h5>投票项目投资人数：<strong>{project.voter_num}</strong></h5>
                                                 </div>
                                         </div>
                                         <div className="col-lg-12">
                                                 <div className="card-body">
-                                                    <h5>众筹项目概述：</h5>
+                                                    <h5>投票项目概述：</h5>
                                                     <p>
                                                         <strong>{project.content}</strong>
                                                     </p>
@@ -324,7 +314,7 @@ class mine_voting_info extends  React.Component {
                                                                                     </div>
                                                                                 </div>
                                                                         </div>
-                                                                        <div className="col-xl-6 col-md-6 mb-4">
+                                                                        {/* <div className="col-xl-6 col-md-6 mb-4">
                                                                                 <div className="card-body">
                                                                                     <div className="row no-gutters align-items-center">
                                                                                         <div className="col mr-2">
@@ -351,7 +341,7 @@ class mine_voting_info extends  React.Component {
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                        </div>
+                                                                        </div> */}
                                                                         <div className="col-xl-12 col-md-6 mb-4">
                                                                                 <div className="card-body">
                                                                                     <div className="row no-gutters align-items-center">
