@@ -53,21 +53,21 @@ class voting_info extends  React.Component {
         }
         else{
             if(this.state.tickets > (project.target_voting - project.num_voted)){
-                alert('The Voting ！')
+                alert('The Voting Requirement has been Satisfied！')
             }
             else if(this.state.tickets == 1){
                 await VotingInstance.methods.Vote_sender(this.props.match.params.id).send({
                     from: this.state.accounts[0],
                     value: web3.utils.toWei(this.state.tickets,'ether')
                 })
-                alert('恭喜您，投资成功1！')
+                alert('Voting Success1！')
             }
             else if(this.state.tickets == 2){
                 await VotingInstance.methods.Vote_sender(this.props.match.params.id).send({
                     from: this.state.accounts[0],
                     value: web3.utils.toWei(this.state.tickets,'ether')
                 })
-                alert('恭喜您，投资成功2！')
+                alert('Voting Success2！')
             }
         }
     }
@@ -113,7 +113,7 @@ class voting_info extends  React.Component {
                                     </li>
 
 									<a className="sidebar-brand d-flex align-items-center justify-content-center">
-										<div className="sidebar-brand-text mx-2">投票系统</div>
+										<div className="sidebar-brand-text mx-2">Voting System</div>
 									</a>
 
 									{/*<!-- Divider -->*/}
@@ -122,26 +122,25 @@ class voting_info extends  React.Component {
 									{/*// <!-- Nav Item - Dashboard -->*/}
 									<li className="nav-item  active">
 										<Link className="nav-link" to='/basic_template'>
-											<span>首页</span></Link>
+											<span>Home</span></Link>
 									</li>
 
 									<li className="nav-item">
 										<Link className="nav-link" to='/all_votings'>
-											<span>所有投票</span></Link>
+											<span>All Voting</span></Link>
 									</li>
 									{/*<!-- Divider -->*/}
 									{/*<hr className="sidebar-divider">*/}
 
 									<li className="nav-item">
 										<Link className="nav-link" to='/voting_creator'>
-											<span>发起投票</span></Link>
+											<span>Initiate Voting</span></Link>
 									</li>
-
                                     <li className="nav-item dropdown no-arrow">
                                         <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span className="mr-2 d-none d-lg-inline text-light small">
-                                                当前账户地址：{this.state.accounts[0]}</span>
+                                            Current Account Address：{this.state.accounts[0]}</span>
                                         </a>
                                     </li>
 
@@ -150,45 +149,45 @@ class voting_info extends  React.Component {
                             </nav>
 
                         <div class="container-fluid">
-                                    <h1 className="h3 mb-0 text-gray-800">投票项目详情</h1>
+                                    <h1 className="h3 mb-0 text-gray-800">Voting Detail</h1>
                                 </div>
                                 <div className="card-body">
                                     <div className="table-responsive" class="row">
                                         <div class="col-lg-12">
                                                 <div className="card-body">
-                                                    <h5>投票项目发起人：<strong>{project.creator_addr}</strong></h5>
+                                                    <h5>Voting Initiator：<strong>{project.creator_addr}</strong></h5>
                                                 </div>
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>投票项目名称：<strong>{project.title}</strong></h5>
+                                                    <h5>Voting Name：<strong>{project.title}</strong><span className="badge badge-warning ml-3">募集截止日期：{ddl}</span></h5>
                                                 </div>
                                                 <div className="card-body">
-                                                    <h5>投票项目状态：<strong>{state}</strong></h5>
+                                                    <h5>Voting Status：<strong>{state}</strong></h5>
                                                 </div>
 
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>投票项目目标投票人数：<strong>{project.target_voting}</strong></h5>
+                                                    <h5>Voting Target：<strong>{project.target_voting}eth</strong></h5>
                                                 </div>
                                                 <div className="card-body">
-                                                    <h5>投票项目已投票数：<strong>{project.num_voted}</strong></h5>
+                                                    <h5>Number of tickets voted：<strong>{project.num_voted}eth</strong></h5>
                                                 </div>
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>投票项目投票人数：<strong>{project.voter_num}</strong></h5>
+                                                    <h5>Tickets already used：<strong>{project.confirmed_ticket}eth</strong></h5>
                                                 </div>
                                         </div>
 										<div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>募集截止日期：<strong>{ddl}</strong></h5>
+                                                    <h5>Voters：<strong>{project.voter_num}</strong></h5>
                                                 </div>
                                         </div>
                                         <div class="col-lg-12">
                                                 <div className="card-body">
-                                                    <h5>投票项目概述：</h5>
+                                                    <h5>Voting Introduction：</h5>
                                                     <p>
                                                         <strong>{project.content}</strong>
                                                     </p>
@@ -197,7 +196,7 @@ class voting_info extends  React.Component {
                                         <div class="col-lg">
                                             <a href="#" className="btn btn-success btn-icon-split"  style={{float:"center"}}
                                                data-target="#myModal" data-toggle="modal">
-                                                <span className="text">投票</span>
+                                                <span className="text">Vote</span>
                                             </a>
                                             <div className="modal fade" id="myModal" tabIndex="-1" role="dialog"
                                                  aria-labelledby="myModalLabel" aria-hidden="true">
@@ -205,7 +204,7 @@ class voting_info extends  React.Component {
                                                     <div className="modal-content">
                                                         <div className="modal-header">
                                                             <h4 className="modal-title" id="myModalLabel">
-                                                                请输入投票数目
+                                                                Voting Number
                                                             </h4>
                                                             <button type="button" className="close" data-dismiss="modal"
                                                                     aria-hidden="true">
@@ -217,10 +216,10 @@ class voting_info extends  React.Component {
                                                         </div>
                                                         <div className="modal-footer">
                                                             <button type="button" className="btn btn-default"
-                                                                    data-dismiss="modal">关闭
+                                                                    data-dismiss="modal">Close
                                                             </button>
                                                             <button type="button" className="btn btn-warning" data-dismiss="modal" onClick={this.up}>
-                                                                确认投票
+                                                                Vote
                                                             </button>
                                                         </div>
                                                     </div>
