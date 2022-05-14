@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "history": "^5.0.1",
+    "history": "^5.0.0",
     "react": "^16.11.0",
     "react-dom": "16.11.0",
     "react-load-script": "0.0.6",
