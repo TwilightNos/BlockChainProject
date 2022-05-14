@@ -9,4 +9,4 @@
 
 5.input order "npm run start"
 
-6.wait for the chrome to start
+6.wait for the chrome to start and start MetaMask
