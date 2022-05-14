@@ -71,7 +71,7 @@ let abi =[
 			},
 			{
 				"internalType": "uint256",
-				"name": "_goalMoney",
+				"name": "_target_tickets",
 				"type": "uint256"
 			},
 			{
@@ -133,7 +133,7 @@ let abi =[
 			},
 			{
 				"internalType": "bool",
-				"name": "isSuccess",
+				"name": "isComplete",
 				"type": "bool"
 			},
 			{

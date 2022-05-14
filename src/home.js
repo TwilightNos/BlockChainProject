@@ -4,10 +4,10 @@ import {Link, NavLink, Redirect, Route, Router, Switch} from "react-router-dom";
 let web3 = require('./Web3');
 let VotingInstance = require('./Voting')
 let projects = []
-let notFinished = 0
+let count_ongoing = 0
 let finished = 0
 let projects_number = 0
-class basic_template extends Component {
+class home extends Component {
     constructor() {
         super()
         this.state = {
@@ -16,7 +16,8 @@ class basic_template extends Component {
     }
 
     componentWillMount = async () => {
-        notFinished = 0
+        //获取当前的所有地址
+        count_ongoing = 0
         finished = 0
         let accounts = await web3.eth.getAccounts()
         let temp = await VotingInstance.methods.getBalance().call()
@@ -26,15 +27,16 @@ class basic_template extends Component {
         let current_time = Date.parse(new Date())
         for(let i = 0; i < projects_number; i++){
             let project = await VotingInstance.methods.all_Votings(i).call()
-            if (project.isComplete === true){
+            if (project.isSuccess === true){
                 finished += 1
             }
             else{
-                notFinished += 1
+                count_ongoing += 1
             }
             projects.push(project)
         }
         this.setState({
+            // manager: manager,
             accounts: accounts
         })
     };
@@ -81,7 +83,7 @@ class basic_template extends Component {
                                     </li>
 									
 									<a className="sidebar-brand d-flex align-items-center justify-content-center">
-										<div className="sidebar-brand-text mx-2">Voting System</div>
+										<div className="sidebar-brand-text mx-2">投票系统</div>
 									</a>
 
 									{/*<!-- Divider -->*/}
@@ -89,23 +91,27 @@ class basic_template extends Component {
 
 									{/*// <!-- Nav Item - Dashboard -->*/}
 									<li className="nav-item  active">
-										<Link className="nav-link" to='/basic_template'>
-											<span>Home</span></Link>
+										<Link className="nav-link" to='/home'>
+											<span>首页</span></Link>
 									</li>
 
 									<li className="nav-item">
 										<Link className="nav-link" to='/all_votings'>
-											<span>All Voting</span></Link>
+											<span>所有投票</span></Link>
 									</li>
+									{/*<!-- Divider -->*/}
+									{/*<hr className="sidebar-divider">*/}
+
 									<li className="nav-item">
 										<Link className="nav-link" to='/voting_creator'>
-											<span>Initiate Voting</span></Link>
+											<span>发起投票</span></Link>
 									</li>
+
                                     <li className="nav-item dropdown no-arrow">
                                         <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span className="mr-2 d-none d-lg-inline text-light small">
-                                            Current Account Address：{this.state.accounts[0]}</span>
+                                                当前账户地址：{this.state.accounts[0]}</span>
                                         </a>
                                     </li>
 
@@ -114,42 +120,59 @@ class basic_template extends Component {
                             </nav>
 
                             <div className="container-fluid">
+
+
                                 <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                                    <h1 className="h3 mb-0 text-gray-800">Overview</h1>
+                                    <h1 className="h3 mb-0 text-gray-800">网站总览</h1>
                                 </div>
+
                                 <div className="row">
                                     <div className="col-xl-12 col-md-6 mb-4">
 										<div className="card-body">
 											<div className="row no-gutters align-items-center">
 													<div
-														className="text-xl font-weight-bold mb-1">
-														<h5>Voting Number: <strong>{projects_number}</strong></h5>
+														className="text-xl font-weight-boldtext-uppercase mb-1">
+														<h5>总项目数: <strong>{projects_number}</strong></h5>
 													</div>
 											</div>
 										</div>
                                     </div>
+
+
                                     <div className="col-xl-12 col-md-6 mb-4">
 										<div className="card-body">
 											<div className="row no-gutters align-items-center">
 													<div
-														className="text-xl font-weight-bold mb-1"> <h5>Finished Voting:<strong>{finished}</strong></h5>
+														className="text-xl font-weight-boldtext-uppercase mb-1"> <h5>已筹项目数: <strong>{finished}</strong></h5>
 													</div>
 											</div>
 										</div>
                                     </div>
+
+
                                     <div className="col-xl-12 col-md-6 mb-4">
                                             <div className="card-body">
                                                 <div className="row no-gutters align-items-center">
                                                         <div
-                                                            className="text-xl font-weight-bold mb-1"><h5>Voting in Progress: <strong>{notFinished}</strong></h5>
+                                                            className="text-xl font-weight-bold text-uppercase mb-1">
+                                                            <h5>在筹项目数: <strong>{count_ongoing}</strong></h5>
                                                         </div>
                                                 </div>
                                             </div>
                                     </div>
                                 </div>
+
+
+
+
                             </div>
+
+
                         </div>
+
                     </div>
+
+
                 </div>
                 <script src="vendor/jquery/jquery.min.js"/>
                 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"/>
@@ -163,4 +186,4 @@ class basic_template extends Component {
     }
 }
 
-export default basic_template;
+export default home;

@@ -87,11 +87,6 @@ class voting_creator extends  React.Component {
 									<a className="sidebar-brand d-flex align-items-center justify-content-center">
 										<div className="sidebar-brand-text mx-2">Voting System</div>
 									</a>
-
-									{/*<!-- Divider -->*/}
-									{/*<hr className="sidebar-divider my-0">*/}
-
-									{/*// <!-- Nav Item - Dashboard -->*/}
 									<li className="nav-item  active">
 										<Link className="nav-link" to='/basic_template'>
 											<span>Home</span></Link>
@@ -119,7 +114,7 @@ class voting_creator extends  React.Component {
                                                 <input type="text" className="form-control form-control-user rounded" name="Name" placeholder="Voting Name" value={this.state.Name} onChange={this.handleChange}/>
                                             </div>
                                             <div className="col-sm-6">
-                                                <input type="number" min="0" className="form-control form-control-user rounded" name="Amount" placeholder="Voting Amount" value={this.state.Amount} onChange={this.handleChange}/>
+                                                <input type="number" min="0" className="form-control form-control-user rounded" name="Amount" placeholder="Voting Ticket" value={this.state.Amount} onChange={this.handleChange}/>
                                             </div>
                                         </div>
                                         <div className="form-group">

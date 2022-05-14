@@ -18,7 +18,7 @@ class all_votings extends  React.Component {
         project = projects[id]
         etime = project.endtime
         let current_time = Date.parse(new Date())
-        if(project.isSuccess === true){
+        if(project.isComplete === true){
             style = "badge badge-info ml-3"
         }
         else{
@@ -36,7 +36,7 @@ class all_votings extends  React.Component {
         console.log(project)
         etime = project.endtime
         let current_time = Date.parse(new Date())
-        if(project.isSuccess === true){
+        if(project.isComplete === true){
             state = "Voting Finished"
         }
         else{
@@ -140,8 +140,7 @@ class all_votings extends  React.Component {
                                             :projects.map((item,index)=>{
                                                 return (
                                                         <div className="card-body">
-                                                            Voting Project Name： {item.title}
-                                                            <span className={this.Is_complete_style(index)}>{this.Is_complete(index)}</span>
+                                                            Voting Project Name: {item.title}
                                                             <Link className="btn btn-warning" style={{float:"right"}}
                                                                   to={{ pathname: '/voting_info/' + index}}>Details</Link>
                                                         </div>

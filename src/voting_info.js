@@ -30,7 +30,7 @@ class voting_info extends  React.Component {
         console.log(project)
         etime = project.endtime
         let current_time = Date.parse(new Date())
-        if(project.isSuccess === true){
+        if(project.isComplete === true){
             state = "Voting Finished"
         }
         else{
@@ -53,7 +53,7 @@ class voting_info extends  React.Component {
         }
         else{
             if(this.state.tickets > (project.target_voting - project.num_voted)){
-                alert('The Voting Requirement has been Satisfied!')
+                alert('The Voting Requirement will exceed the limit!')
             }
             else{
                 await VotingInstance.methods.Vote_sender(this.props.match.params.id).send({
@@ -133,7 +133,7 @@ class voting_info extends  React.Component {
                                         <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span className="mr-2 d-none d-lg-inline text-light small">
-                                            Current Account Address：{this.state.accounts[0]}</span>
+                                            Current Account Address:{this.state.accounts[0]}</span>
                                         </a>
                                     </li>
 
@@ -148,34 +148,39 @@ class voting_info extends  React.Component {
                                     <div className="table-responsive" class="row">
                                         <div class="col-lg-12">
                                                 <div className="card-body">
-                                                    <h5>Voting Initiator：<strong>{project.creator_addr}</strong></h5>
+                                                    <h5>Voting Initiator:<strong>{project.creator_addr}</strong></h5>
                                                 </div>
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>Voting Name：<strong>{project.title}</strong><span className="badge badge-warning ml-3">Voting Endtime:{etime}</span></h5>
+                                                    <h5>Voting Name:<strong>{project.title}</strong></h5>
                                                 </div>
                                                 <div className="card-body">
-                                                    <h5>Voting Status：<strong>{state}</strong></h5>
+                                                    <h5>Voting Status:<strong>{state}</strong></h5>
                                                 </div>
 
                                         </div>
                                         <div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>Voting Target：<strong>{project.target_voting}</strong></h5>
+                                                    <h5>Voting Target:<strong>{project.target_voting}</strong></h5>
                                                 </div>
                                                 <div className="card-body">
-                                                    <h5>Number of tickets voted：<strong>{project.num_voted}</strong></h5>
+                                                    <h5>Number of tickets voted:<strong>{project.num_voted}</strong></h5>
                                                 </div>
+                                        </div>
+                                        <div class = "col-lg-6">
+                                            <div className="card-body">
+                                                <h5>Voting End Time:<strong>{etime}</strong></h5>
+                                            </div>
                                         </div>
 										<div class="col-lg-6">
                                                 <div className="card-body">
-                                                    <h5>Voters：<strong>{project.voter_num}</strong></h5>
+                                                    <h5>Voters:<strong>{project.voter_num}</strong></h5>
                                                 </div>
                                         </div>
                                         <div class="col-lg-12">
                                                 <div className="card-body">
-                                                    <h5>Voting Introduction：</h5>
+                                                    <h5>Voting Introduction:</h5>
                                                     <p>
                                                         <strong>{project.content}</strong>
                                                     </p>
