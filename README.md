@@ -10,3 +10,5 @@
 5.input order "npm run start"
 
 6.wait for the chrome to start and start MetaMask
+
+Solidity files are in the folder contracts. Js files are in the folder src.
